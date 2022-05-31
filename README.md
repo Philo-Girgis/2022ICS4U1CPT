@@ -1,4 +1,3 @@
-# 2022ICSCPT
-Test CPT Repository
+# 2022ICS4U1CPT
 
-Create repository, add users to repository, have users upload files to repository, keep track or changes to repository
+Repository for Pico Park created by Alan, Jerry, and Philo
