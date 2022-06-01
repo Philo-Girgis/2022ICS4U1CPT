@@ -3,18 +3,46 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class testjump implements ActionListener{
+public class testjump implements ActionListener, KeyListener{
 	//properties
-	testlogic tlmodel;
 	tjpanel thepanel = new tjpanel();
 	JFrame theframe = new JFrame("test jump");
+	Timer theTimer = new Timer (1000/60, this);
+	boolean blnjump = false;
+	testlogic tlmodel = new testlogic();
+	int intTime = 1;
 	
 	//methods
 	public void actionPerformed(ActionEvent evt){
+		if(evt.getSource() == theTimer){
+			thepanel.repaint();
+			if(blnjump == true){
+				thepanel.intBallY = tlmodel.jump(thepanel.intBallY, intTime);
+			}
+			thepanel.intBallY = tlmodel.freefall(thepanel.intBallY, intTime);
+			
+			//time
+			intTime = tlmodel.time(intTime);
+			
+		}
+		//free fall
+		
+	}
+	
+	public void keyReleased(KeyEvent evt){
+	}
+	public void keyPressed(KeyEvent evt){	
+	}
+	
+	public void keyTyped(KeyEvent evt){
+		if(evt.getKeyChar() == ' '){
+			blnjump = true;
+		}
 	}
 	
 	//constructor
 	public testjump(){
+		
 		thepanel.setPreferredSize(new Dimension(800, 600));
 		
 		theframe.setContentPane(thepanel);
@@ -22,6 +50,8 @@ public class testjump implements ActionListener{
 		theframe.pack();
 		theframe.setResizable(false);
 		theframe.setVisible(true);
+		theframe.addKeyListener(this);
+		theTimer.start();
 	}
 	
 	//main method
