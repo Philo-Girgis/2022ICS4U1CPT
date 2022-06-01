@@ -5,13 +5,17 @@ public class testlogic{
 	private int intChange = 0;
 
 	//methods
-	public int jump(int intY, int intT){
-		intY = intY - intT;
+	public int jump(int intY, double dblT){
+		double dblY;
+		dblY = (double)intY - 7.5*dblT;
+		intY = (int)dblY;
 		return intY;
 	}
 	
-	public int freefall(int intY, int intT){
-		intY = intY + intT*intT;
+	public int freefall(int intY, double dblT){
+		double dblY;
+		dblY = (double)intY + 5.5*dblT*dblT;
+		intY = (int)dblY;
 		return intY;
 	}
 	
@@ -23,10 +27,11 @@ public class testlogic{
 		}
 	}
 	
-	public int time(int intT){
-		intT = 1 + intChange/20;
+	public double time(double dblT){
+		double dblChange = (double)intChange;
+		dblT = 0.5 + dblChange/60;
 		intChange++;
-		return intT;
+		return dblT;
 	}
 
 	//constructor

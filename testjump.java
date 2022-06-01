@@ -10,19 +10,19 @@ public class testjump implements ActionListener, KeyListener{
 	Timer theTimer = new Timer (1000/60, this);
 	boolean blnjump = false;
 	testlogic tlmodel = new testlogic();
-	int intTime = 1;
+	double dblTime = 0;
 	
 	//methods
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == theTimer){
 			thepanel.repaint();
 			if(blnjump == true){
-				thepanel.intBallY = tlmodel.jump(thepanel.intBallY, intTime);
+				thepanel.intBallY = tlmodel.jump(thepanel.intBallY, dblTime);
 			}
-			thepanel.intBallY = tlmodel.freefall(thepanel.intBallY, intTime);
+			thepanel.intBallY = tlmodel.freefall(thepanel.intBallY, dblTime);
 			
 			//time
-			intTime = tlmodel.time(intTime);
+			dblTime = tlmodel.time(dblTime);
 			
 		}
 		//free fall
