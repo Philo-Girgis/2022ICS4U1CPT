@@ -47,13 +47,23 @@ public class testjump implements ActionListener, KeyListener{
 	}
 	
 	public void keyReleased(KeyEvent evt){
+		if(evt.getKeyChar() == 'a'){
+			thepanel.intXchange = 0;
+		}else if(evt.getKeyChar() == 'd'){
+			thepanel.intXchange = 0;
+		}
 	}
-	public void keyPressed(KeyEvent evt){	
+	public void keyPressed(KeyEvent evt){
+		if(evt.getKeyChar() == 'a'){
+			thepanel.intXchange = -5;
+		}else if(evt.getKeyChar() == 'd'){
+			thepanel.intXchange = 5;
+		}
 	}
 	
 	//jump
 	public void keyTyped(KeyEvent evt){
-		if(evt.getKeyChar() == ' ' && thepanel.intBallY == 400-20){
+		if(evt.getKeyChar() == 'w' && thepanel.intBallY == 400-20){
 			blnjump = true;
 		}
 	}

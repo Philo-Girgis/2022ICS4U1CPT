@@ -8,7 +8,7 @@ public class testlogic{
 	//jump method
 	public int jump(int intY, double dblT){
 		double dblY;
-		dblY = (double)intY - 6.5*dblT;
+		dblY = (double)intY - 10.1*dblT;
 		intY = (int)dblY;
 		return intY;
 	}
@@ -16,7 +16,7 @@ public class testlogic{
 	//free fall method
 	public int freefall(int intY, double dblT){
 		double dblY;
-		dblY = (double)intY + 5.5*dblT*dblT;
+		dblY = (double)intY + 9.8*dblT*dblT;
 		intY = (int)dblY;
 		return intY;
 	}
