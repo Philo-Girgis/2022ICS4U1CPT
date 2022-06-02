@@ -11,31 +11,59 @@ public class testjump implements ActionListener, KeyListener{
 	boolean blnjump = false;
 	testlogic tlmodel = new testlogic();
 	double dblTime = 0;
+	boolean blnstop = false;
 	
 	//methods
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == theTimer){
 			thepanel.repaint();
+			
+			//time
+			if(blnstop == false || blnjump == true){
+				dblTime = tlmodel.time(dblTime);
+				blnstop = false;
+			}
+			
+			//jump
 			if(blnjump == true){
 				thepanel.intBallY = tlmodel.jump(thepanel.intBallY, dblTime);
 			}
-			thepanel.intBallY = tlmodel.freefall(thepanel.intBallY, dblTime);
 			
-			//time
-			dblTime = tlmodel.time(dblTime);
+			//freefall
+			if(blnstop == false){
+				thepanel.intBallY = tlmodel.freefall(thepanel.intBallY, dblTime);
+			}
+			
+			//stop
+			blnstop = tlmodel.stop(thepanel.intBallY);
+			if(blnstop == true){
+				dblTime = 0;
+				thepanel.intBallY = 400-20;
+				blnjump = false;
+			}
 			
 		}
-		//free fall
 		
 	}
 	
 	public void keyReleased(KeyEvent evt){
+		if(evt.getKeyChar() == 'a'){
+			thepanel.intXchange = 0;
+		}else if(evt.getKeyChar() == 'd'){
+			thepanel.intXchange = 0;
+		}
 	}
-	public void keyPressed(KeyEvent evt){	
+	public void keyPressed(KeyEvent evt){
+		if(evt.getKeyChar() == 'a'){
+			thepanel.intXchange = -5;
+		}else if(evt.getKeyChar() == 'd'){
+			thepanel.intXchange = 5;
+		}
 	}
 	
+	//jump
 	public void keyTyped(KeyEvent evt){
-		if(evt.getKeyChar() == ' '){
+		if(evt.getKeyChar() == 'w' && thepanel.intBallY == 400-20){
 			blnjump = true;
 		}
 	}
