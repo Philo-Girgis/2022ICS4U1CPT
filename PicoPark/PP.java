@@ -23,41 +23,66 @@ public class PP{
 	}
 	
 	//P1 time method
-	public double P1time(double dblT){
-		dblT = 0.5 + dblChange1/60;
-		dblChange1++;
+	public double P1time(double dblT, boolean blnstop){
+		if(blnstop == false){
+			dblT = 0.5 + dblChange1/60;
+			dblChange1++;
+		}else{
+			dblChange1 = 0;
+			dblT = 0;
+		}
 		return dblT;
 	}
 	
 	//P2 time method
-	public double P2time(double dblT){
-		dblT = 0.5 + dblChange2/60;
-		dblChange2++;
+	public double P2time(double dblT, boolean blnstop){
+		if(blnstop == false){
+			dblT = 0.5 + dblChange2/60;
+			dblChange2++;
+		}else{
+			dblChange2 = 0;
+			dblT = 0;
+		}
 		return dblT;
 	}
 	
 	//P3 time method
-	public double P3time(double dblT){
-		dblT = 0.5 + dblChange3/60;
-		dblChange3++;
+	public double P3time(double dblT, boolean blnstop){
+		if(blnstop == false){
+			dblT = 0.5 + dblChange3/60;
+			dblChange3++;
+		}else{
+			dblChange3 = 0;
+			dblT = 0;
+		}
 		return dblT;
 	}
 	
 	//P4 time method
-	public double P4time(double dblT){
-		dblT = 0.5 + dblChange4/60;
-		dblChange4++;
+	public double P4time(double dblT, boolean blnstop){
+		if(blnstop == false){
+			dblT = 0.5 + dblChange4/60;
+			dblChange4++;
+		}else{
+			dblChange4 = 0;
+			dblT = 0;
+		}
 		return dblT;
 	}
 	
 	//P5 time method
-	public double P5time(double dblT){
-		dblT = 0.5 + dblChange5/60;
-		dblChange5++;
+	public double P5time(double dblT, boolean blnstop){
+		if(blnstop == false){
+			dblT = 0.5 + dblChange5/60;
+			dblChange5++;
+		}else{
+			dblChange5 = 0;
+			dblT = 0;
+		}
 		return dblT;
 	}
 	
-	//stop method for menu animation
+	//when to stop for menu animation
 	public boolean menustop(int intY){
 		if(intY >= 480){
 			return true;
@@ -66,19 +91,40 @@ public class PP{
 		}
 	}
 	
+	//when to jump for menu animation
+	public boolean menujump(int intX, boolean blnstop){
+		if(intX >= 500 && intX <=600 || blnstop == false){
+			return true;
+		}else{
+			return false;
+		}	
+	}
+	
+	//adjustment method for menu animation
+	public int menuadjust(int intY){
+		if(intY >= 480){
+			intY = 480;
+		}
+		return intY;
+	}
+	
 	//general jump method
-	public int jump(int intY, double dblT){
-		double dblY;
-		dblY = (double)intY - 10.1*dblT;
-		intY = (int)dblY;
+	public int jump(int intY, double dblT, boolean blnjump){
+		if(blnjump == true){
+			double dblY;
+			dblY = (double)intY - 10.1*dblT;
+			intY = (int)dblY;
+		}
 		return intY;
 	}
 	
 	//general free fall method
-	public int freefall(int intY, double dblT){
-		double dblY;
-		dblY = (double)intY + 9.8*dblT*dblT;
-		intY = (int)dblY;
+	public int freefall(int intY, double dblT, boolean blnstop){
+		if(blnstop == false){
+			double dblY;
+			dblY = (double)intY + 9.8*dblT*dblT;
+			intY = (int)dblY;
+		}
 		return intY;
 	}
 	
