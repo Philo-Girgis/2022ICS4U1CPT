@@ -16,6 +16,12 @@ public class Menu extends JPanel{
 	int intP5X = -50;
 	int intP5Y = 480;
 	int intXchange = 5;
+	PP ppmodel = new PP();
+	double dblT1 = 0;
+	double dblT2 = 0;
+	double dblT3 = 0;
+	double dblT4 = 0;
+	double dblT5 = 0;
 	
 	//methods
 	public void paintComponent(Graphics g){
@@ -34,22 +40,20 @@ public class Menu extends JPanel{
 		g.fillRect(intP4X,intP4Y,20,20);
 		g.setColor(Color.ORANGE);
 		g.fillRect(intP5X,intP5Y,20,20);
+		//animation
 		intP1X = intP1X + intXchange;
 		intP2X = intP2X + intXchange;
 		intP3X = intP3X + intXchange;
 		intP4X = intP4X + intXchange;
 		intP5X = intP5X + intXchange;
-		if(intP1X > 1500){
-			intP1X = -100;
-		}else if(intP2X > 1500){
-			intP2X = -100;
-		}else if(intP3X > 1500){
-			intP3X = -100;
-		}else if(intP4X > 1500){
-			intP4X = -100;
-		}else if (intP5X > 1500){
-			intP5X = -100;
-		}
+		//reset
+		intP1X = ppmodel.menureset(intP1X);
+		intP2X = ppmodel.menureset(intP2X);
+		intP3X = ppmodel.menureset(intP3X);
+		intP4X = ppmodel.menureset(intP4X);
+		intP5X = ppmodel.menureset(intP5X);
+		//creatures will start to jump once each passes intX = 500
+		
 	}
 	
 	//constructor
