@@ -6,15 +6,15 @@ import javax.swing.*;
 public class Menu extends JPanel{
 	//properties
 	int intP1X = -250;
-	int intP1Y = 480;
+	int intP1Y = 580;
 	int intP2X = -200;
-	int intP2Y = 480;
+	int intP2Y = 580;
 	int intP3X = -150;
-	int intP3Y = 480;
+	int intP3Y = 580;
 	int intP4X = -100;
-	int intP4Y = 480;
+	int intP4Y = 580;
 	int intP5X = -50;
-	int intP5Y = 480;
+	int intP5Y = 580;
 	int intXchange = 5;
 	PP ppmodel = new PP();
 	double dblT1 = 0;
@@ -32,6 +32,7 @@ public class Menu extends JPanel{
 	boolean blnstop3 = true;
 	boolean blnstop4 = true;
 	boolean blnstop5 = true;
+	Font bigfont = new Font(null, 0, 100);
 	
 	//methods
 	public void paintComponent(Graphics g){
@@ -39,7 +40,7 @@ public class Menu extends JPanel{
 		g.setColor(Color.WHITE);
 		g.fillRect(0,0,1280,720);
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 500, 1500,400);
+		g.fillRect(0, 600, 1500,400);
 		g.setColor(Color.RED);
 		g.fillRect(intP1X,intP1Y,20,20);
 		g.setColor(Color.GREEN);
@@ -131,6 +132,12 @@ public class Menu extends JPanel{
 		//jump activates only if enter is pressed and player was touching the ground when it was
 		//the one thing i don't have is adjusments
 		//that can be done though
+		
+		//to hold the menu options
+		g.setColor(Color.ORANGE);
+		g.fillRect(240,200,800,200);
+		g.setFont(bigfont);
+		g.drawString("PICO PARK", 360,110);
 		
 	}
 	

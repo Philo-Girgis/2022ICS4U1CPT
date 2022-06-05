@@ -84,7 +84,7 @@ public class PP{
 	
 	//when to stop for menu animation
 	public boolean menustop(int intY){
-		if(intY >= 480){
+		if(intY >= 580){
 			return true;
 		}else{
 			return false;
@@ -93,7 +93,7 @@ public class PP{
 	
 	//when to jump for menu animation
 	public boolean menujump(int intX, boolean blnstop){
-		if(intX >= 500 && intX <=600 || blnstop == false){
+		if(intX >= 450 && intX <=500 || blnstop == false){
 			return true;
 		}else{
 			return false;
@@ -102,8 +102,8 @@ public class PP{
 	
 	//adjustment method for menu animation
 	public int menuadjust(int intY){
-		if(intY >= 480){
-			intY = 480;
+		if(intY >= 580){
+			intY = 580;
 		}
 		return intY;
 	}
