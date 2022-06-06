@@ -91,7 +91,7 @@ public class PicoPark implements ActionListener, KeyListener{
 		menupanel.add(helpbutton);
 		
 		menubutton.setSize(150,50);
-		menubutton.setLocation(550,300);
+		menubutton.setLocation(1050,570);
 		menubutton.addActionListener(this);
 		helppanel.add(menubutton);
 		

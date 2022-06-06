@@ -1,9 +1,10 @@
 //Application: Pico Park
 //Creators: Philo, Jerry, Alan
-//Last Edited: 6/4/2022
-//Version: 0.005
+//Last Edited: 6/6/2022
+//Version: 0.1
 
 //i'm pretty sure this is the only program that requires a javadoc
+import java.io.*;
 
 public class PP{
 	//properties
@@ -14,6 +15,70 @@ public class PP{
 	double dblChange5;
 	
 	//methods
+	
+	//read array method
+	public String[][] readarray(String strfilename){
+		String strmaparray[][] = new String[17][25];
+		try{
+			BufferedReader readfile = new BufferedReader(new FileReader(strfilename));
+			for(int intRow = 0; intRow < 17; intRow++){
+				String strline = readfile.readLine();
+				String strRow[] = strline.split(",");
+				for(int intCol = 0; intCol < 25; intCol++){
+					strmaparray[intRow][intCol] = strRow[intCol];
+				}
+			}
+			readfile.close();
+		}catch(IOException a){
+			System.out.println("file not found");
+		}
+		return strmaparray;
+	}
+	
+	//general stop detection method for y
+	//return boolean
+	public boolean stopY(){
+		//takes array, takes intY, checks if inside wall, tells it it can stop now
+		//if it gets to the floor, everything stops
+		//if it gets the cieling, jump gets turned off and time resets
+		//will figure out later
+		
+		return true;
+	}
+	
+	//general reset time method
+	//returns double
+	//checks if cieling is touched
+	//if yes, then time is reset
+	public double timereset(){
+		//takes array, takes intY, takes times, checks if cieling is touched
+		//if cieling is touched, return time as 0
+		
+		return 0.0;
+	}
+	
+	
+	//general adjustment for x
+	//return int
+	public int adjustX(){
+		//takes array, takes intX, is inside a wall, they get put outside of it
+		//must run only after intX movement is registered but before it's printed to the screen
+		
+		return 0;
+	}
+	
+	//general adjustment for y;
+	//return int
+	public int adjustY(){
+		//takes array, takes intY, checks if inside a wall, puts it outside of it
+		//must run after collision detection
+		
+		return 0;
+	}
+	
+	//gonna have to create a seperate detection for players now
+	//ugh
+	
 	//reset method for menu animation
 	public int menureset (int intX){
 		if(intX > 1500){
