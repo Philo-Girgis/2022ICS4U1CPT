@@ -24,6 +24,7 @@ public class PicoPark implements ActionListener, KeyListener{
 	//faillabel.setFont(new Font) should allow me to change the font
 	//or maybe i won't use it
 	JButton menubutton = new JButton("Main Menu");
+	String strpanel = "menu";
 	
 	//gonna work on help menu next to set up the player input stuff
 	//gonna create a csv for this one too
@@ -32,42 +33,87 @@ public class PicoPark implements ActionListener, KeyListener{
 	//methods
 	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == thetimer){
-			menupanel.repaint();
-			lobbypanel.repaint();
-			helppanel.repaint();
-			levelspanel.repaint();
+			if(strpanel.equals("menu")){
+				menupanel.repaint();
+			}else if(strpanel.equals("lobby")){
+				lobbypanel.repaint();
+			}else if(strpanel.equals("help")){
+				helppanel.repaint();
+			}else if(strpanel.equals("level")){
+				levelspanel.repaint();
+			}
 		}
 		
 		if(evt.getSource() == helpbutton){
 			theframe.setContentPane(helppanel);
 			theframe.pack();
+			//request focus on the frame makes keylistener function
+			//this may get complicated when chat comes into play
+			//unless i can request focus on the frame once send is entered
+			//figure that out later
+			theframe.requestFocus();
+			strpanel = "help";
+			menupanel.intP1X = -250;
+			menupanel.intP1Y = 580;
+			menupanel.intP2X = -200;
+			menupanel.intP2Y = 580;
+			menupanel.intP3X = -150;
+			menupanel.intP3Y = 580;
+			menupanel.intP4X = -100;
+			menupanel.intP4Y = 580;
+			menupanel.intP5X = -50;
+			menupanel.intP5Y = 580;
+			menupanel.dblT1 = 0;
+			menupanel.dblT2 = 0;
+			menupanel.dblT3 = 0;
+			menupanel.dblT4 = 0;
+			menupanel.dblT5 = 0;
+			menupanel.blnjump1 = false;
+			menupanel.blnjump2 = false;
+			menupanel.blnjump3 = false;
+			menupanel.blnjump4 = false;
+			menupanel.blnjump5 = false;
+			menupanel.blnstop1 = true;
+			menupanel.blnstop2 = true;
+			menupanel.blnstop3 = true;
+			menupanel.blnstop4 = true;
+			menupanel.blnstop5 = true;
 		}
 		
 		if(evt.getSource() == menubutton){
 			theframe.setContentPane(menupanel);
 			theframe.pack();
+			strpanel = "menu";
+			helppanel.intPX = 80;
+			helppanel.intPY = 80;
+			helppanel.dblT = 0;
+			helppanel.blnjump = false;
+			helppanel.blnstop = false;
+			helppanel.blnstart = false;
 		}
 		
 	}
 	
-	//keyboard is not responding
-	//none of the key events seem to be responding
+	
 	public void keyPressed(KeyEvent evt){
-		if(evt.getKeyChar() == 'w'){
-			helppanel.blnjump = true;
-		}else if(evt.getKeyChar() == 'a'){
-			helppanel.intXchange = -5;
-		}else if(evt.getKeyChar() == 'd'){
-			helppanel.intXchange = 5;
+		if(strpanel.equals("help") && helppanel.blnstart == true){
+			if(evt.getKeyChar() == 'w' && helppanel.blnstop == true){
+				helppanel.blnjump = true;
+			}else if(evt.getKeyChar() == 'a'){
+				helppanel.intXchange = -5;
+			}else if(evt.getKeyChar() == 'd'){
+				helppanel.intXchange = 5;
+			}
 		}
-		
 	}
 	
 	public void keyReleased(KeyEvent evt){
-		if(evt.getKeyChar() == 'a'){
-			helppanel.intXchange = 0;
-		}else if(evt.getKeyChar() == 'd'){
-			helppanel.intXchange = 0;
+		if(strpanel.equals("help")){
+			if(evt.getKeyChar() == 'a'){
+				helppanel.intXchange = 0;
+			}else if(evt.getKeyChar() == 'd'){
+				helppanel.intXchange = 0;
+			}
 		}
 	}
 	

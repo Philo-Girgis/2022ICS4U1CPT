@@ -42,8 +42,9 @@ public class PP{
 		boolean stop = false;
 		for(int intRow = 0; intRow < 17; intRow++){
 			for(int intCol = 0; intCol < 25; intCol++){
-				if(strarray[intRow][intCol] == "w"){
-					if(intX+20 > intRow*40 && intX < intRow*40+40 && intY+20 >= intCol*40 && intY+20 <= intCol*40+10){
+				String strread = strarray[intRow][intCol];
+				if(strread.equals("w")){
+					if(intX+20 > intCol*40 && intX < intCol*40+40 && intY+20 >= intRow*40 && intY+20 < intRow*40+30){
 						stop = true;
 					}
 				}
@@ -61,8 +62,9 @@ public class PP{
 		//if cieling is touched, return time as 0
 		for(int intRow = 0; intRow < 17; intRow++){
 			for(int intCol = 0; intCol < 25; intCol++){
-				if(strarray[intRow][intCol] == "w"){
-					if(intX+20 > intRow*40 && intX < intRow*40+40 && intY <= intCol*40-40 && intY >= intCol*40-50){
+				String strread = strarray[intRow][intCol];
+				if(strread.equals("w")){
+					if(intX+20 > intCol*40 && intX < intCol*40+40 && intY <= intRow*40+40 && intY >= intRow*40+30){
 						dblT = 0;
 					}
 				}
@@ -83,13 +85,14 @@ public class PP{
 		//in that case, this adjustment needs to run before stopY check
 		for(int intRow = 0; intRow < 17; intRow++){
 			for(int intCol = 0; intCol < 25; intCol++){
-				if(strarray[intRow][intCol] == "w"){
-					if(intX+20 >= intRow*40 && intX+20 <= intRow*40+5 && intY+20 > intCol*40 && intY < intCol*40+40){
+				String strread = strarray[intRow][intCol];
+				if(strread.equals("w")){
+					if(intX+20 >= intCol*40 && intX+20 <= intCol*40+5 && intY+20 > intRow*40 && intY < intRow*40+40){
 						//players hits left of wall
-						intX = intRow*40-20;
-					}else if(intX <= intRow*40+40 && intX >= intRow*40+35 && intY+20 > intCol*40 && intY < intCol*40+40){
+						intX = intCol*40-20;
+					}else if(intX <= intCol*40+40 && intX >= intCol*40+35 && intY+20 > intRow*40 && intY < intRow*40+40){
 						//players hits right of wall
-						intX = intRow*40+40;
+						intX = intCol*40+40;
 					}
 				}
 			}
@@ -102,15 +105,17 @@ public class PP{
 	public int adjustY(String[][] strarray, int intX, int intY){
 		//takes array, takes intY, checks if inside a wall, puts it outside of it
 		//must run after collision detection
+		//i'm gonna change it so it's dependant 
 		for(int intRow = 0; intRow < 17; intRow++){
 			for(int intCol = 0; intCol < 25; intCol++){
-				if(strarray[intRow][intCol] == "w"){
-					if(intX+20 >= intRow*40 && intX <= intRow*40+40 && intY+20 > intCol*40 && intY < intCol*40+10){
+				String strread = strarray[intRow][intCol];
+				if(strread.equals("w")){
+					if(intX+20 > intCol*40 && intX < intCol*40+40 && intY+20 > intRow*40 && intY < intRow*40+30){
 						//players hit ground
-						intY = intCol*40-20;
-					}else if(intX+20 >= intRow*40 && intX <= intRow*40+40 && intY < intCol*40+40 && intY > intCol*40+30){
+						intY = intRow*40-20;
+					}else if(intX+20 > intCol*40 && intX < intCol*40+40 && intY < intRow*40+40 && intY > intRow*40+30){
 						//players hit cieling
-						intY = intCol*40+40;
+						intY = intRow*40+40;
 					}
 				}
 			}

@@ -34,6 +34,8 @@ public class Menu extends JPanel{
 	boolean blnstop5 = true;
 	Font bigfont = new Font(null, 0, 100);
 	
+	//might write a reset method so that once the menu is left, the animation resets
+	
 	//methods
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -132,6 +134,10 @@ public class Menu extends JPanel{
 		//jump activates only if enter is pressed and player was touching the ground when it was
 		//the one thing i don't have is adjusments
 		//that can be done though
+		
+		//include a block for them to jump over
+		g.setColor(Color.GRAY);
+		g.fillRect(600,560, 40,40);
 		
 		//to hold the menu options
 		g.setColor(Color.ORANGE);
