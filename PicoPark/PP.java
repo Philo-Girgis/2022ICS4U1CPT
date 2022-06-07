@@ -1,7 +1,7 @@
 //Application: Pico Park
 //Creators: Philo, Jerry, Alan
 //Last Edited: 6/6/2022
-//Version: 0.1
+//Version: 0.5
 
 //i'm pretty sure this is the only program that requires a javadoc
 import java.io.*;
@@ -37,43 +37,86 @@ public class PP{
 	
 	//general stop detection method for y
 	//return boolean
-	public boolean stopY(){
-		//takes array, takes intY, checks if inside wall, tells it it can stop now
-		//if it gets to the floor, everything stops
-		//if it gets the cieling, jump gets turned off and time resets
-		//will figure out later
-		
-		return true;
+	public boolean stopY(String[][] strarray, int intX, int intY){
+		//checks if the floor has been reached
+		boolean stop = false;
+		for(int intRow = 0; intRow < 17; intRow++){
+			for(int intCol = 0; intCol < 25; intCol++){
+				if(strarray[intRow][intCol] == "w"){
+					if(intX+20 > intRow*40 && intX < intRow*40+40 && intY+20 >= intCol*40 && intY+20 <= intCol*40+10){
+						stop = true;
+					}
+				}
+			}
+		}
+		return stop;
 	}
 	
 	//general reset time method
 	//returns double
 	//checks if cieling is touched
 	//if yes, then time is reset
-	public double timereset(){
+	public double timereset(String[][] strarray, int intY, int intX, double dblT){
 		//takes array, takes intY, takes times, checks if cieling is touched
 		//if cieling is touched, return time as 0
+		for(int intRow = 0; intRow < 17; intRow++){
+			for(int intCol = 0; intCol < 25; intCol++){
+				if(strarray[intRow][intCol] == "w"){
+					if(intX+20 > intRow*40 && intX < intRow*40+40 && intY <= intCol*40-40 && intY >= intCol*40-50){
+						dblT = 0;
+					}
+				}
+			}
+		}
 		
-		return 0.0;
+		return dblT;
 	}
 	
 	
 	//general adjustment for x
 	//return int
-	public int adjustX(){
+	public int adjustX(String[][] strarray, int intX, int intY){
 		//takes array, takes intX, is inside a wall, they get put outside of it
 		//must run only after intX movement is registered but before it's printed to the screen
-		
-		return 0;
+		//no adjustment should be needed, change should = 0 when it's next to a wall
+		//or should it
+		//in that case, this adjustment needs to run before stopY check
+		for(int intRow = 0; intRow < 17; intRow++){
+			for(int intCol = 0; intCol < 25; intCol++){
+				if(strarray[intRow][intCol] == "w"){
+					if(intX+20 >= intRow*40 && intX+20 <= intRow*40+5 && intY+20 > intCol*40 && intY < intCol*40+40){
+						//players hits left of wall
+						intX = intRow*40-20;
+					}else if(intX <= intRow*40+40 && intX >= intRow*40+35 && intY+20 > intCol*40 && intY < intCol*40+40){
+						//players hits right of wall
+						intX = intRow*40+40;
+					}
+				}
+			}
+		}
+		return intX;
 	}
 	
 	//general adjustment for y;
 	//return int
-	public int adjustY(){
+	public int adjustY(String[][] strarray, int intX, int intY){
 		//takes array, takes intY, checks if inside a wall, puts it outside of it
 		//must run after collision detection
+		for(int intRow = 0; intRow < 17; intRow++){
+			for(int intCol = 0; intCol < 25; intCol++){
+				if(strarray[intRow][intCol] == "w"){
+					if(intX+20 >= intRow*40 && intX <= intRow*40+40 && intY+20 > intCol*40 && intY < intCol*40+10){
+						//players hit ground
+						intY = intCol*40-20;
+					}else if(intX+20 >= intRow*40 && intX <= intRow*40+40 && intY < intCol*40+40 && intY > intCol*40+30){
+						//players hit cieling
+						intY = intCol*40+40;
+					}
+				}
+			}
+		}
 		
-		return 0;
+		return intY;
 	}
 	
 	//gonna have to create a seperate detection for players now

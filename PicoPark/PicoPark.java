@@ -50,16 +50,28 @@ public class PicoPark implements ActionListener, KeyListener{
 		
 	}
 	
+	//keyboard is not responding
+	//none of the key events seem to be responding
 	public void keyPressed(KeyEvent evt){
+		if(evt.getKeyChar() == 'w'){
+			helppanel.blnjump = true;
+		}else if(evt.getKeyChar() == 'a'){
+			helppanel.intXchange = -5;
+		}else if(evt.getKeyChar() == 'd'){
+			helppanel.intXchange = 5;
+		}
 		
 	}
 	
 	public void keyReleased(KeyEvent evt){
-		
+		if(evt.getKeyChar() == 'a'){
+			helppanel.intXchange = 0;
+		}else if(evt.getKeyChar() == 'd'){
+			helppanel.intXchange = 0;
+		}
 	}
 	
 	public void keyTyped(KeyEvent evt){
-		
 	}
 	
 	//constructor

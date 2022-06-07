@@ -7,11 +7,12 @@ public class Help extends JPanel{
 	Font bigfont = new Font(null, 0, 50);
 	
 	//player stuff
-	int intPX = 50;
-	int intPY = 50;
+	int intPX = 80;
+	int intPY = 80;
 	double dblT = 0;
 	boolean blnjump = false;
 	boolean blnstop = true;
+	int intXchange = 0;
 	
 	//40 by 40 squares
 	//1000 by 720 level
@@ -48,6 +49,12 @@ public class Help extends JPanel{
 		
 		g.setColor(Color.RED);
 		g.fillRect(intPX, intPY, 20,20);
+		
+		//model has been updated, but now i need to write the order
+		//also, keyboard still won't cooperate
+		
+		//for X movement
+		intPX = intPX + intXchange;
 		
 		//jump is a player input
 		//they can change jump to true
