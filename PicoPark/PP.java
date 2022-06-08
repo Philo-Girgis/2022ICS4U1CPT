@@ -1,7 +1,7 @@
 //Application: Pico Park
 //Creators: Philo, Jerry, Alan
-//Last Edited: 6/6/2022
-//Version: 0.5
+//Last Edited: 6/7/2022
+//Version: 0.55
 
 //i'm pretty sure this is the only program that requires a javadoc
 import java.io.*;

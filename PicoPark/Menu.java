@@ -41,7 +41,7 @@ public class Menu extends JPanel{
 		super.paintComponent(g);
 		g.setColor(Color.WHITE);
 		g.fillRect(0,0,1280,720);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.ORANGE);
 		g.fillRect(0, 600, 1500,400);
 		g.setColor(Color.RED);
 		g.fillRect(intP1X,intP1Y,20,20);
@@ -136,11 +136,10 @@ public class Menu extends JPanel{
 		//that can be done though
 		
 		//include a block for them to jump over
-		g.setColor(Color.GRAY);
+		g.setColor(Color.ORANGE);
 		g.fillRect(600,560, 40,40);
 		
 		//to hold the menu options
-		g.setColor(Color.ORANGE);
 		g.fillRect(240,200,800,200);
 		g.setFont(bigfont);
 		g.drawString("PICO PARK", 360,110);
