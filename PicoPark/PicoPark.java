@@ -38,11 +38,39 @@ public class PicoPark implements ActionListener, KeyListener{
 				menupanel.repaint();
 			}else if(strpanel.equals("lobby")){
 				lobbypanel.repaint();
+				//send an update with timer
+				//at all times
+				//this is the way
+				if(lobbypanel.stridentity.equals("Player 1")){
+					//player 1 be sending all the info
+					//send number of players ready
+					//send all coordinates
+					//or maybe that's only when they get coordinates themselves
+					ssm.sendText("P1X:" +lobbypanel.intP1X);
+					ssm.sendText("P1Y:" +lobbypanel.intP1Y);
+				}else if(lobbypanel.stridentity.equals("Player 2")){
+					//all other players will only be sending coordinates
+					ssm.sendText("P2X:" +lobbypanel.intP2X);
+					ssm.sendText("P2Y:" +lobbypanel.intP2Y);
+				}else if(lobbypanel.stridentity.equals("Player 3")){
+					//all other players will only be sending coordinates
+					ssm.sendText("P3X:" +lobbypanel.intP3X);
+					ssm.sendText("P3Y:" +lobbypanel.intP3Y);
+				}else if(lobbypanel.stridentity.equals("Player 4")){
+					//all other players will only be sending coordinates
+					ssm.sendText("P4X:"+lobbypanel.intP4X);
+					ssm.sendText("P4Y:"+lobbypanel.intP4Y);
+				}else if(lobbypanel.stridentity.equals("Player 5")){
+					//all other players will only be sending coordinates
+					ssm.sendText("P5X:"+lobbypanel.intP5X);
+					ssm.sendText("P5Y:"+lobbypanel.intP5Y);
+				}
 			}else if(strpanel.equals("help")){
 				helppanel.repaint();
 			}else if(strpanel.equals("level")){
 				levelspanel.repaint();
 			}
+			
 		}
 		
 		if(evt.getSource() == helpbutton){
@@ -81,6 +109,7 @@ public class PicoPark implements ActionListener, KeyListener{
 			menupanel.blnstop3 = true;
 			menupanel.blnstop4 = true;
 			menupanel.blnstop5 = true;
+			faillabel.setText("");
 		}
 		
 		if(evt.getSource() == menubutton){
@@ -91,6 +120,7 @@ public class PicoPark implements ActionListener, KeyListener{
 			helppanel.intPX = 80;
 			helppanel.intPY = 80;
 			helppanel.dblT = 0;
+			helppanel.intXchange = 0;
 			helppanel.blnjump = false;
 			helppanel.blnstop = false;
 			helppanel.blnstart = false;
@@ -135,13 +165,19 @@ public class PicoPark implements ActionListener, KeyListener{
 				menupanel.blnstop3 = true;
 				menupanel.blnstop4 = true;
 				menupanel.blnstop5 = true;
+				faillabel.setText("");
 				//lobby things
 				//host is automatically player 1
 				lobbypanel.stridentity = "Player 1";
+				lobbypanel.intplayers = lobbypanel.intplayers +1;
 				//gonna have to also apply this to the levels panel
+				lobbypanel.intP1Y = 300;
 				
 			}
 		}
+		
+		//evt.getSource == ssm
+		//ssm!=null
 		
 		//forget about join for now, set up host lobby first
 		if(evt.getSource() == joinbutton){
@@ -150,10 +186,9 @@ public class PicoPark implements ActionListener, KeyListener{
 			if(gotConnect){
 				//send text join
 				//ssm.sendText
-				
-				//evt.getSource == ssm
-				//ssm!=null
-				
+				ssm.sendText("join");
+				//is that it?
+				//cause everything else seems to depend on a message
 				
 			}else{
 				faillabel.setText("Invalid IP Address");
@@ -161,9 +196,26 @@ public class PicoPark implements ActionListener, KeyListener{
 		}
 		
 		if(evt.getSource() == leavebutton){
+			if(lobbypanel.strready.equals("Ready")){
+				lobbypanel.intready = lobbypanel.intready -1;
+				ssm.sendText("PAR:"+lobbypanel.intready);
+			}
 			theframe.setContentPane(menupanel);
 			theframe.pack();
 			strpanel = "menu";
+			//send message before hand
+			//or client should check for disconnect which forces them back to lobby
+			if(lobbypanel.stridentity.equals("Player 1")){
+				ssm.sendText("P1R:null");
+			}else if(lobbypanel.stridentity.equals("Player 2")){
+				ssm.sendText("P2R:null");
+			}else if(lobbypanel.stridentity.equals("Player 3")){
+				ssm.sendText("P3R:null");
+			}else if(lobbypanel.stridentity.equals("Player 4")){
+				ssm.sendText("P4R:null");
+			}else if(lobbypanel.stridentity.equals("Player 5")){
+				ssm.sendText("P5R:null");
+			}
 			ssm.disconnect();
 			//reset lobby
 			lobbypanel.strready = "Not Ready";
@@ -173,6 +225,27 @@ public class PicoPark implements ActionListener, KeyListener{
 			chatarea.append("\nHelpBot: If you ever lose control of your character, try hitting send to regain control");
 			lobbypanel.stridentity = "";
 			lobbypanel.intready = 0;
+			lobbypanel.intplayers = 0;
+			lobbypanel.strP1 = null;
+			lobbypanel.strP2 = null;
+			lobbypanel.strP3 = null;
+			lobbypanel.strP4 = null;
+			lobbypanel.strP5 = null;
+			lobbypanel.dblT = 0;
+			lobbypanel.intXchange = 0;
+			lobbypanel.blnjump = false;
+			lobbypanel.blnstop = false;
+			lobbypanel.blnstart = false;
+			lobbypanel.intP1X = 150;
+			lobbypanel.intP1Y = -100;
+			lobbypanel.intP2X = 300;
+			lobbypanel.intP2Y = -100;
+			lobbypanel.intP3X = 450;
+			lobbypanel.intP3Y = -100;
+			lobbypanel.intP4X = 600;
+			lobbypanel.intP4Y = -100;
+			lobbypanel.intP5X = 750;
+			lobbypanel.intP5Y = -100;
 		}
 		
 		if(evt.getSource() == readybutton){
@@ -181,16 +254,19 @@ public class PicoPark implements ActionListener, KeyListener{
 			//sure, cadawas said min of 4
 			//but that's more like at least 4
 			//i'll ask just in case
+			//send text ready
 			if(lobbypanel.strready.equals("Not Ready")){
 				lobbypanel.strready = "Ready";
 				readybutton.setText("Not Ready");
 				lobbypanel.intready = lobbypanel.intready +1;
+				ssm.sendText("PAR:"+lobbypanel.intready);
 			}else if(lobbypanel.strready.equals("Ready")){
 				lobbypanel.strready = "Not Ready";
 				readybutton.setText("Ready");
 				lobbypanel.intready = lobbypanel.intready -1;
+				ssm.sendText("PAR:"+lobbypanel.intready);
 			}
-			
+			theframe.requestFocus();
 		}
 		
 		if(evt.getSource() == sendbutton){
@@ -207,6 +283,197 @@ public class PicoPark implements ActionListener, KeyListener{
 		if(evt.getSource() == ssm){
 			//host gets messages from client
 			//client gets messages from host
+			//this code is for both client and host
+			//this should be limited to the host
+			//but for some reason...
+			//if i have this limited to the host, it doesn't work
+			//why?
+			//it works now... and i don't know why...
+			//guess i just won't touch it
+			if(ssm.readText().equals("join") && lobbypanel.stridentity.equals("Player 1")){
+				if(lobbypanel.intplayers < 5){
+					//check which players are active
+					if(lobbypanel.strP2 == null){
+						lobbypanel.strP2 = "false";
+						ssm.sendText("Player 2");
+					}else if(lobbypanel.strP3 == null){
+						lobbypanel.strP3 = "false";
+						ssm.sendText("Player 3");
+					}else if(lobbypanel.strP4 == null){
+						lobbypanel.strP4 = "false";
+						ssm.sendText("Player 4");
+					}else if(lobbypanel.strP5 == null){
+						lobbypanel.strP5 = "false";
+						ssm.sendText("Player 5");
+					}
+					//host side of things
+					lobbypanel.intplayers = lobbypanel.intplayers+1;					
+					
+				}else{
+					ssm.sendText("null");
+				}
+			}else if(lobbypanel.stridentity.equals("")){
+				if(ssm.readText().equals("null")){
+				//you are not in lobby and host prevents you from joining
+					ssm.disconnect();
+					faillabel.setText("Lobby is full/active");
+				}else if(ssm.readText().equals("Player 2")){
+					lobbypanel.stridentity = "Player 2";
+					lobbypanel.intP2Y = 300;
+				}else if(ssm.readText().equals("Player 3")){
+					lobbypanel.stridentity = "Player 3";
+					lobbypanel.intP3Y = 300;
+				}else if(ssm.readText().equals("Player 4")){
+					lobbypanel.stridentity = "Player 4";
+					lobbypanel.intP4Y = 300;
+				}else if(ssm.readText().equals("Player 5")){
+					lobbypanel.stridentity = "Player 5";
+					lobbypanel.intP5Y = 300;
+				}
+				if(!lobbypanel.stridentity.equals("")){
+					theframe.setContentPane(lobbypanel);
+					theframe.pack();
+					theframe.requestFocus();
+					strpanel = "lobby";
+					//resetting menu animation
+					menupanel.intP1X = -250;
+					menupanel.intP1Y = 580;
+					menupanel.intP2X = -200;
+					menupanel.intP2Y = 580;
+					menupanel.intP3X = -150;
+					menupanel.intP3Y = 580;
+					menupanel.intP4X = -100;
+					menupanel.intP4Y = 580;
+					menupanel.intP5X = -50;
+					menupanel.intP5Y = 580;
+					menupanel.dblT1 = 0;
+					menupanel.dblT2 = 0;
+					menupanel.dblT3 = 0;
+					menupanel.dblT4 = 0;
+					menupanel.dblT5 = 0;
+					menupanel.blnjump1 = false;
+					menupanel.blnjump2 = false;
+					menupanel.blnjump3 = false;
+					menupanel.blnjump4 = false;
+					menupanel.blnjump5 = false;
+					menupanel.blnstop1 = true;
+					menupanel.blnstop2 = true;
+					menupanel.blnstop3 = true;
+					menupanel.blnstop4 = true;
+					menupanel.blnstop5 = true;
+					faillabel.setText("");
+				}
+			}else if(ssm.readText().equals("P1R:null")){
+				//forces clients to return to menu
+				ssm.disconnect();
+				//return to menu
+				theframe.setContentPane(menupanel);
+				theframe.pack();
+				strpanel = "menu";
+				faillabel.setText("The Lobby was closed");
+				//reset lobby
+				lobbypanel.strready = "Not Ready";
+				readybutton.setText("Ready");
+				chatarea.setText("");
+				chatarea.append("HelpBot: Type a message and hit send");
+				chatarea.append("\nHelpBot: If you ever lose control of your character, try hitting send to regain control");
+				lobbypanel.stridentity = "";
+				lobbypanel.intready = 0;
+				lobbypanel.intplayers = 0;
+				lobbypanel.strP1 = null;
+				lobbypanel.strP2 = null;
+				lobbypanel.strP3 = null;
+				lobbypanel.strP4 = null;
+				lobbypanel.strP5 = null;
+				lobbypanel.dblT = 0;
+				lobbypanel.intXchange = 0;
+				lobbypanel.blnjump = false;
+				lobbypanel.blnstop = false;
+				lobbypanel.blnstart = false;
+				lobbypanel.intP1X = 150;
+				lobbypanel.intP1Y = -100;
+				lobbypanel.intP2X = 300;
+				lobbypanel.intP2Y = -100;
+				lobbypanel.intP3X = 450;
+				lobbypanel.intP3Y = -100;
+				lobbypanel.intP4X = 600;
+				lobbypanel.intP4Y = -100;
+				lobbypanel.intP5X = 750;
+				lobbypanel.intP5Y = -100;
+			}else if(ssm.readText().equals("P2R:null")){
+				//resets specific player
+				lobbypanel.strP2 = null;
+				lobbypanel.intP2X = 300;
+				lobbypanel.intP2Y = -100;
+				lobbypanel.intplayers = lobbypanel.intplayers -1;
+			}else if(ssm.readText().equals("P3R:null")){
+				lobbypanel.strP3 = null;
+				lobbypanel.intP3X = 450;
+				lobbypanel.intP3Y = -100;
+				lobbypanel.intplayers = lobbypanel.intplayers -1;
+			}else if(ssm.readText().equals("P4R:null")){
+				lobbypanel.strP4 = null;
+				lobbypanel.intP4X = 600;
+				lobbypanel.intP4Y = -100;
+				lobbypanel.intplayers = lobbypanel.intplayers -1;
+			}else if(ssm.readText().equals("P5R:null")){
+				lobbypanel.strP5 = null;
+				lobbypanel.intP5X = 750;
+				lobbypanel.intP5Y = -100;
+				lobbypanel.intplayers = lobbypanel.intplayers -1;
+			}else if(ssm.readText().substring(0,4).equals("PAR:")){
+				lobbypanel.intready = Integer.parseInt(ssm.readText().substring(4,5));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("PAR:"+lobbypanel.intready);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P1Y:")){
+				lobbypanel.intP1Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+			}else if(ssm.readText().substring(0,4).equals("P1X:")){
+				lobbypanel.intP1X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+			}else if(ssm.readText().substring(0,4).equals("P2Y:")){
+				lobbypanel.intP2Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P2Y:"+lobbypanel.intP2Y);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P2X")){
+				lobbypanel.intP2X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P2X:"+lobbypanel.intP2X);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P3Y:")){
+				lobbypanel.intP3Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P3Y:"+lobbypanel.intP3Y);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P3X:")){
+				lobbypanel.intP3X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P3X:"+lobbypanel.intP3X);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P4Y:")){
+				lobbypanel.intP4Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P4Y:"+lobbypanel.intP4Y);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P4X:")){
+				lobbypanel.intP4X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P4X:"+lobbypanel.intP4X);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P5Y:")){
+				lobbypanel.intP5Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P5Y:"+lobbypanel.intP5Y);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P5X:")){
+				lobbypanel.intP5X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P5X:"+lobbypanel.intP5X);
+				}
+			}
+			
+			//we're also gonna need to do chat messages
+			//oh boy
 			
 		}
 		
@@ -222,8 +489,14 @@ public class PicoPark implements ActionListener, KeyListener{
 			}else if(evt.getKeyChar() == 'd'){
 				helppanel.intXchange = 5;
 			}
-		}else if(strpanel.equals("lobby")){
-			
+		}else if(strpanel.equals("lobby") && lobbypanel.blnstart == true){
+			if(evt.getKeyChar() == 'w' && lobbypanel.blnstop == true){
+				lobbypanel.blnjump = true;
+			}else if(evt.getKeyChar() == 'a'){
+				lobbypanel.intXchange = -5;
+			}else if(evt.getKeyChar() == 'd'){
+				lobbypanel.intXchange = 5;
+			}
 		}
 	}
 	
@@ -235,7 +508,11 @@ public class PicoPark implements ActionListener, KeyListener{
 				helppanel.intXchange = 0;
 			}
 		}else if(strpanel.equals("lobby")){
-			
+			if(evt.getKeyChar() == 'a'){
+				lobbypanel.intXchange = 0;
+			}else if(evt.getKeyChar() == 'd'){
+				lobbypanel.intXchange = 0;
+			}
 		}
 	}
 	
