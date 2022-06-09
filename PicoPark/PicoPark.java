@@ -181,11 +181,13 @@ public class PicoPark implements ActionListener, KeyListener{
 		
 		//forget about join for now, set up host lobby first
 		if(evt.getSource() == joinbutton){
+			thetimer.stop();
 			ssm = new SuperSocketMaster(joinfield.getText(), 1111, this);
 			boolean gotConnect = ssm.connect();
 			if(gotConnect){
 				//send text join
 				//ssm.sendText
+				thetimer.start();
 				ssm.sendText("join");
 				//is that it?
 				//cause everything else seems to depend on a message
@@ -493,30 +495,43 @@ public class PicoPark implements ActionListener, KeyListener{
 				}
 			}else if(ssm.readText().substring(0,4).equals("P1C:")){
 				chatarea.append("\nP1: "+ssm.readText().substring(4,ssm.readText().length()));
-			}else if(ssm.readText().substring(0,4).equals("P2C:")){
+			}else if(ssm.readText().substring(0,4).equals("P2C:") && !lobbypanel.stridentity.equals("Player 2")){
 				chatarea.append("\nP2: "+ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P2C:"+ssm.readText().substring(4,ssm.readText().length()));
+					System.out.println("server resending P2 message to all clients");
 				}
-			}else if(ssm.readText().substring(0,4).equals("P3C:")){
+				*/
+			}else if(ssm.readText().substring(0,4).equals("P3C:") && !lobbypanel.stridentity.equals("Player 3")){
 				chatarea.append("\nP3: "+ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P3C:"+ssm.readText().substring(4,ssm.readText().length()));
+					System.out.println("server resending P3 message to all clients");
 				}
-			}else if(ssm.readText().substring(0,4).equals("P4C:")){
+				*/
+			}else if(ssm.readText().substring(0,4).equals("P4C:") && !lobbypanel.stridentity.equals("Player 4")){
 				chatarea.append("\nP4: "+ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P4C:"+ssm.readText().substring(4,ssm.readText().length()));
+					System.out.println("server resending P4 message to all clients");
 				}
-			}else if(ssm.readText().substring(0,4).equals("P5C:")){
+				*/
+			}else if(ssm.readText().substring(0,4).equals("P5C:") && !lobbypanel.stridentity.equals("Player 5")){
 				chatarea.append("\nP5: "+ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P5C:"+ssm.readText().substring(4,ssm.readText().length()));
+					System.out.println("server resending P5 message to all clients");
 				}
+				*/
 			}
 			
 			//we're also gonna need to do chat messages
 			//oh boy
+			//chat was surprisingly easy
 			
 		}
 		
