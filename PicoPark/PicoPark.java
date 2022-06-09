@@ -275,6 +275,23 @@ public class PicoPark implements ActionListener, KeyListener{
 			//that's probably gonna be a property on this side of the fence
 			if(lobbypanel.stridentity.equals("Player 1") && !messagefield.getText().equals("")){
 				chatarea.append("\nP1: "+messagefield.getText());
+				ssm.sendText("P1C:"+messagefield.getText());
+				messagefield.setText("");
+			}else if(lobbypanel.stridentity.equals("Player 2") && !messagefield.getText().equals("")){
+				chatarea.append("\nP2: "+messagefield.getText());
+				ssm.sendText("P2C:"+messagefield.getText());
+				messagefield.setText("");
+			}else if(lobbypanel.stridentity.equals("Player 3") && !messagefield.getText().equals("")){
+				chatarea.append("\nP3: "+messagefield.getText());
+				ssm.sendText("P3C:"+messagefield.getText());
+				messagefield.setText("");
+			}else if(lobbypanel.stridentity.equals("Player 4") && !messagefield.getText().equals("")){
+				chatarea.append("\nP4: "+messagefield.getText());
+				ssm.sendText("P4C:"+messagefield.getText());
+				messagefield.setText("");
+			}else if(lobbypanel.stridentity.equals("Player 5") && !messagefield.getText().equals("")){
+				chatarea.append("\nP5: "+messagefield.getText());
+				ssm.sendText("P5C:"+messagefield.getText());
 				messagefield.setText("");
 			}
 			theframe.requestFocus();
@@ -296,15 +313,19 @@ public class PicoPark implements ActionListener, KeyListener{
 					if(lobbypanel.strP2 == null){
 						lobbypanel.strP2 = "false";
 						ssm.sendText("Player 2");
+						ssm.sendText("PAR:"+lobbypanel.intready);
 					}else if(lobbypanel.strP3 == null){
 						lobbypanel.strP3 = "false";
 						ssm.sendText("Player 3");
+						ssm.sendText("PAR:"+lobbypanel.intready);
 					}else if(lobbypanel.strP4 == null){
 						lobbypanel.strP4 = "false";
 						ssm.sendText("Player 4");
+						ssm.sendText("PAR:"+lobbypanel.intready);
 					}else if(lobbypanel.strP5 == null){
 						lobbypanel.strP5 = "false";
 						ssm.sendText("Player 5");
+						ssm.sendText("PAR:"+lobbypanel.intready);
 					}
 					//host side of things
 					lobbypanel.intplayers = lobbypanel.intplayers+1;					
@@ -435,7 +456,7 @@ public class PicoPark implements ActionListener, KeyListener{
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P2Y:"+lobbypanel.intP2Y);
 				}
-			}else if(ssm.readText().substring(0,4).equals("P2X")){
+			}else if(ssm.readText().substring(0,4).equals("P2X:")){
 				lobbypanel.intP2X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P2X:"+lobbypanel.intP2X);
@@ -469,6 +490,28 @@ public class PicoPark implements ActionListener, KeyListener{
 				lobbypanel.intP5X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P5X:"+lobbypanel.intP5X);
+				}
+			}else if(ssm.readText().substring(0,4).equals("P1C:")){
+				chatarea.append("\nP1: "+ssm.readText().substring(4,ssm.readText().length()));
+			}else if(ssm.readText().substring(0,4).equals("P2C:")){
+				chatarea.append("\nP2: "+ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P2C:"+ssm.readText().substring(4,ssm.readText().length()));
+				}
+			}else if(ssm.readText().substring(0,4).equals("P3C:")){
+				chatarea.append("\nP3: "+ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P3C:"+ssm.readText().substring(4,ssm.readText().length()));
+				}
+			}else if(ssm.readText().substring(0,4).equals("P4C:")){
+				chatarea.append("\nP4: "+ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P4C:"+ssm.readText().substring(4,ssm.readText().length()));
+				}
+			}else if(ssm.readText().substring(0,4).equals("P5C:")){
+				chatarea.append("\nP5: "+ssm.readText().substring(4,ssm.readText().length()));
+				if(lobbypanel.stridentity.equals("Player 1")){
+					ssm.sendText("P5C:"+ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}
 			
