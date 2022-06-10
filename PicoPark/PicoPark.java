@@ -193,6 +193,7 @@ public class PicoPark implements ActionListener, KeyListener{
 				//cause everything else seems to depend on a message
 				
 			}else{
+				thetimer.start();
 				faillabel.setText("Invalid IP Address");
 			}
 		}

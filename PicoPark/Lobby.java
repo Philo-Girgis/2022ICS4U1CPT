@@ -101,22 +101,37 @@ public class Lobby extends JPanel{
 		
 		if(stridentity.equals("Player 1")){
 			intP1X = intP1X + intXchange;
+			//player collision adjustment first,
+			intP1X = ppmodel.adjustPX(intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP4X, intP4Y, intP5X, intP5Y);
+			//wall collision
 			intP1X = ppmodel.adjustX(strmaparray, intP1X, intP1Y);
 		}else if(stridentity.equals("Player 2")){
 			intP2X = intP2X + intXchange;
+			//player collision adjustment first,
+			intP2X = ppmodel.adjustPX(intP2X, intP2Y, intP1X, intP1Y, intP3X, intP3Y, intP4X, intP4Y, intP5X, intP5Y);
+			//wall collision
 			intP2X = ppmodel.adjustX(strmaparray, intP2X, intP2Y);
 		}else if(stridentity.equals("Player 3")){
 			intP3X = intP3X + intXchange;
+			//player collision adjustment first,
+			intP3X = ppmodel.adjustPX(intP3X, intP3Y, intP1X, intP1Y, intP2X, intP2Y, intP4X, intP4Y, intP5X, intP5Y);
+			//wall collision
 			intP3X = ppmodel.adjustX(strmaparray, intP3X, intP3Y);
 		}else if(stridentity.equals("Player 4")){
 			intP4X = intP4X + intXchange;
+			//player collision adjustment first,
+			intP4X = ppmodel.adjustPX(intP4X, intP4Y, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP5X, intP5Y);
+			//wall collision
 			intP4X = ppmodel.adjustX(strmaparray, intP4X, intP4Y);
 		}else if(stridentity.equals("Player 5")){
 			intP5X = intP5X + intXchange;
+			//player collision adjustment first,
+			intP5X = ppmodel.adjustPX(intP5X, intP5Y, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP4X, intP4Y);
+			//wall collision
 			intP5X = ppmodel.adjustX(strmaparray, intP5X, intP5Y);
 		}
 		
-		//ensure time is o
+		//ensure time is 0
 		if(dblT == 0){
 			ppmodel.dblChange1 = 0;
 		}
@@ -134,6 +149,8 @@ public class Lobby extends JPanel{
 			intP1Y = ppmodel.freefall(intP1Y, dblT, blnstop);
 			//then i check if we hit a cieling
 			dblT = ppmodel.timereset(strmaparray, intP1Y, intP1X, dblT);
+			//check if you hit a player "cieling"
+			dblT = ppmodel.resetPT(dblT, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP4X, intP4Y, intP5X, intP5Y);
 		}else if(stridentity.equals("Player 2")){
 			//start jump
 			intP2Y = ppmodel.jump(intP2Y, dblT, blnjump);
@@ -141,6 +158,8 @@ public class Lobby extends JPanel{
 			intP2Y = ppmodel.freefall(intP2Y, dblT, blnstop);
 			//then i check if we hit a cieling
 			dblT = ppmodel.timereset(strmaparray, intP2Y, intP2X, dblT);
+			//check if you hit a player "cieling"
+			dblT = ppmodel.resetPT(dblT, intP2X, intP2Y, intP1X, intP1Y, intP3X, intP3Y, intP4X, intP4Y, intP5X, intP5Y);
 		}else if(stridentity.equals("Player 3")){
 			//start jump
 			intP3Y = ppmodel.jump(intP3Y, dblT, blnjump);
@@ -148,6 +167,8 @@ public class Lobby extends JPanel{
 			intP3Y = ppmodel.freefall(intP3Y, dblT, blnstop);
 			//then i check if we hit a cieling
 			dblT = ppmodel.timereset(strmaparray, intP3Y, intP3X, dblT);
+			//check if you hit a player "cieling"
+			dblT = ppmodel.resetPT(dblT, intP3X, intP3Y, intP1X, intP1Y, intP2X, intP2Y, intP4X, intP4Y, intP5X, intP5Y);
 		}else if(stridentity.equals("Player 4")){
 			//start jump
 			intP4Y = ppmodel.jump(intP4Y, dblT, blnjump);
@@ -155,13 +176,17 @@ public class Lobby extends JPanel{
 			intP4Y = ppmodel.freefall(intP4Y, dblT, blnstop);
 			//then i check if we hit a cieling
 			dblT = ppmodel.timereset(strmaparray, intP4Y, intP4X, dblT);
+			//check if you hit a player "cieling"
+			dblT = ppmodel.resetPT(dblT, intP4X, intP4Y, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP5X, intP5Y);
 		}else if(stridentity.equals("Player 5")){
 			//start jump
 			intP5Y = ppmodel.jump(intP5Y, dblT, blnjump);
 			//then i begin freefall
-			intP5Y = ppmodel.freefall(intP5Y, dblT, blnstop);
+			intP5Y = ppmodel.freefall(intP5Y, dblT, blnstop);			
 			//then i check if we hit a cieling
 			dblT = ppmodel.timereset(strmaparray, intP5Y, intP5X, dblT);
+			//check if you hit a player "cieling"
+			dblT = ppmodel.resetPT(dblT, intP5X, intP5Y, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP4X, intP4Y);
 		}
 		
 		
@@ -175,18 +200,38 @@ public class Lobby extends JPanel{
 		if(stridentity.equals("Player 1")){
 			//then i check if we hit the floor
 			blnstop = ppmodel.stopY(strmaparray, intP1X, intP1Y);
+			//check if you hit a player "floor"
+			if(blnstop != true){
+				blnstop = ppmodel.stopPY(intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP4X, intP4Y, intP5X, intP5Y);
+			}
 		}else if(stridentity.equals("Player 2")){
 			//then i check if we hit the floor
 			blnstop = ppmodel.stopY(strmaparray, intP2X, intP2Y);
+			//check if you hit a player "floor"
+			if(blnstop != true){
+				blnstop = ppmodel.stopPY(intP2X, intP2Y, intP1X, intP1Y, intP3X, intP3Y, intP4X, intP4Y, intP5X, intP5Y);
+			}
 		}else if(stridentity.equals("Player 3")){
 			//then i check if we hit the floor
 			blnstop = ppmodel.stopY(strmaparray, intP3X, intP3Y);
+			//check if you hit a player "floor"
+			if(blnstop != true){
+				blnstop = ppmodel.stopPY(intP3X, intP3Y, intP1X, intP1Y, intP2X, intP2Y, intP4X, intP4Y, intP5X, intP5Y);
+			}
 		}else if(stridentity.equals("Player 4")){
 			//then i check if we hit the floor
 			blnstop = ppmodel.stopY(strmaparray, intP4X, intP4Y);
+			//check if you hit a player "floor"
+			if(blnstop != true){
+				blnstop = ppmodel.stopPY(intP4X, intP4Y, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP5X, intP5Y);
+			}
 		}else if(stridentity.equals("Player 5")){
 			//then i check if we hit the floor
 			blnstop = ppmodel.stopY(strmaparray, intP5X, intP5Y);
+			//check if you hit a player "floor"
+			if(blnstop != true){
+				blnstop = ppmodel.stopPY(intP5X, intP5Y, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP4X, intP4Y);
+			}
 		}
 		
 		//if blnstop = true, blnjump = false, blnstart = true
@@ -196,18 +241,28 @@ public class Lobby extends JPanel{
 		}
 		
 		if(stridentity.equals("Player 1")){
+			//player collision adjustment first,
+			intP1Y = ppmodel.adjustPY(intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP4X, intP4Y, intP5X, intP5Y);
 			//the i make adjustments for Y
 			intP1Y = ppmodel.adjustY(strmaparray, intP1X, intP1Y);
 		}else if(stridentity.equals("Player 2")){
+			//player collision adjustment first,
+			intP2Y = ppmodel.adjustPY(intP2X, intP2Y, intP1X, intP1Y, intP3X, intP3Y, intP4X, intP4Y, intP5X, intP5Y);
 			//the i make adjustments for Y
 			intP2Y = ppmodel.adjustY(strmaparray, intP2X, intP2Y);
 		}else if(stridentity.equals("Player 3")){
+			//player collision adjustment first,
+			intP3Y = ppmodel.adjustPY(intP3X, intP3Y, intP1X, intP1Y, intP2X, intP2Y, intP4X, intP4Y, intP5X, intP5Y);
 			//the i make adjustments for Y
 			intP3Y = ppmodel.adjustY(strmaparray, intP3X, intP3Y);
 		}else if(stridentity.equals("Player 4")){
+			//player collision adjustment first,
+			intP4Y = ppmodel.adjustPY(intP4X, intP4Y, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP5X, intP5Y);
 			//the i make adjustments for Y
 			intP4Y = ppmodel.adjustY(strmaparray, intP4X, intP4Y);
 		}else if(stridentity.equals("Player 5")){
+			//player collision adjustment first,
+			intP5Y = ppmodel.adjustPY(intP5X, intP5Y, intP1X, intP1Y, intP2X, intP2Y, intP3X, intP3Y, intP4X, intP4Y);
 			//the i make adjustments for Y
 			intP5Y = ppmodel.adjustY(strmaparray, intP5X, intP5Y);
 		}

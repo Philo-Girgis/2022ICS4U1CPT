@@ -241,6 +241,99 @@ public class PP{
 		return intY;
 	}
 	
+	//repeat code for collision and adjusment but now for players
+	
+	//player stop check for y (hitting the floor)
+	//checks if it has hit other players
+	//need player coordinates instead of an array
+	public boolean stopPY(int intX1, int intY1, int intX2, int intY2, int intX3, int intY3, int intX4, int intY4, int intX5, int intY5){
+		//if the bottom of "player1" touches the top of any other player, then stop = true
+		//else they have no touched and stop is false
+		if(intX1+20 > intX2 && intX1 < intX2+20 && intY1+20 >= intY2 && intY1+20 < intY2+20){
+			return true;
+		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1+20 >= intY3 && intY1+20 < intY3+20){
+			return true;
+		}else if(intX1+20 > intX4 && intX1 < intX4+20 && intY1+20 >= intY4 && intY1+20 < intY4+20){
+			return true;
+		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1+20 >= intY3 && intY1+20 < intY3+20){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	
+	//player time reset for y (hitting cieling)
+	public double resetPT(double dblT, int intX1, int intY1, int intX2, int intY2, int intX3, int intY3, int intX4, int intY4, int intX5, int intY5){
+		if(intX1+20 > intX2 && intX1 < intX2+20 && intY1 <= intY2+20 && intY1 > intY2){
+			return 0;
+		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1 <= intY3+20 && intY1 > intY3){
+			return 0;
+		}else if(intX1+20 > intX4 && intX1 < intX4+20 && intY1 <= intY4+20 && intY1 > intY4){
+			return 0;
+		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1 <= intY5+20 && intY1 > intY5){
+			return 0;
+		}else{
+			return dblT;
+		}
+	}
+	
+	//player x adjustment
+	public int adjustPX(int intX1, int intY1, int intX2, int intY2, int intX3, int intY3, int intX4, int intY4, int intX5, int intY5){
+		//left of "P1" hits right of a player
+		if(intX1 <= intX2+20 && intX1 > intX2 && intY1+20 > intY2 && intY1 < intY2+20){
+			intX1 = intX2+20;
+		}else if(intX1 <= intX3+20 && intX1 > intX3 && intY1+20 > intY3 && intY1 < intY3+20){
+			intX1 = intX3+20;
+		}else if(intX1 <= intX4+20 && intX1 > intX4 && intY1+20 > intY4 && intY1 < intY4+20){
+			intX1 = intX4+20;
+		}else if(intX1 <= intX5+20 && intX1 > intX5 && intY1+20 > intY5 && intY1 < intY5+20){
+			intX1 = intX5+20;
+		}
+		
+		//right of "P1" left of a player
+		if(intX1+20 >= intX2 && intX1+20 < intX2+20 && intY1+20 > intY2 && intY1 < intY2+20){
+			intX1 = intX2-20;
+		}else if(intX1+20 >= intX3 && intX1+20 < intX3+20 && intY1+20 > intY3 && intY1 < intY3+20){
+			intX1 = intX3-20;
+		}else if(intX1+20 >= intX4 && intX1+20 < intX4+20 && intY1+20 > intY4 && intY1 < intY4+20){
+			intX1 = intX4-20;
+		}else if(intX1+20 >= intX5 && intX1+20 < intX5+20 && intY1+20 > intY5 && intY1 < intY5+20){
+			intX1 = intX5-20;
+		}
+		
+		return intX1;
+	}
+	
+	
+	//player y adjustment
+	public int adjustPY(int intX1, int intY1, int intX2, int intY2, int intX3, int intY3, int intX4, int intY4, int intX5, int intY5){
+		//player "cieling" 
+		if(intX1+20 > intX2 && intX1 < intX2+20 && intY1 <= intY2+20 && intY1 > intY2){
+			intY1 = intY2+20;
+		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1 <= intY3+20 && intY1 > intY3){
+			intY1 = intY3+20;
+		}else if(intX1+20 > intX4 && intX1 < intX4+20 && intY1 <= intY4+20 && intY1 > intY4){
+			intY1 = intY4+20;
+		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1 <= intY5+20 && intY1 > intY5){
+			intY1 = intY5+20;
+		}
+		
+		//player "floor"
+		if(intX1+20 > intX2 && intX1 < intX2+20 && intY1+20 >= intY2 && intY1+20 < intY2+20){
+			intY1 = intY2-20;
+		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1+20 >= intY3 && intY1+20 < intY3+20){
+			intY1 = intY3-20;
+		}else if(intX1+20 > intX4 && intX1 < intX4+20 && intY1+20 >= intY4 && intY1+20 < intY4+20){
+			intY1 = intY4-20;
+		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1+20 >= intY3 && intY1+20 < intY3+20){
+			intY1 = intY5-20;
+		}
+		
+		return intY1;
+	}
+	
+	
 	//constuctor
 	public PP(){
 	}
