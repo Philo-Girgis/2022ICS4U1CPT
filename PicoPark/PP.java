@@ -255,7 +255,7 @@ public class PP{
 			return true;
 		}else if(intX1+20 > intX4 && intX1 < intX4+20 && intY1+20 >= intY4 && intY1+20 < intY4+20){
 			return true;
-		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1+20 >= intY3 && intY1+20 < intY3+20){
+		}else if(intX1+20 > intX5 && intX1 < intX5+20 && intY1+20 >= intY5 && intY1+20 < intY5+20){
 			return true;
 		}else{
 			return false;
@@ -271,7 +271,7 @@ public class PP{
 			return 0;
 		}else if(intX1+20 > intX4 && intX1 < intX4+20 && intY1 <= intY4+20 && intY1 > intY4){
 			return 0;
-		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1 <= intY5+20 && intY1 > intY5){
+		}else if(intX1+20 > intX5 && intX1 < intX5+20 && intY1 <= intY5+20 && intY1 > intY5){
 			return 0;
 		}else{
 			return dblT;
@@ -315,7 +315,7 @@ public class PP{
 			intY1 = intY3+20;
 		}else if(intX1+20 > intX4 && intX1 < intX4+20 && intY1 <= intY4+20 && intY1 > intY4){
 			intY1 = intY4+20;
-		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1 <= intY5+20 && intY1 > intY5){
+		}else if(intX1+20 > intX5 && intX1 < intX5+20 && intY1 <= intY5+20 && intY1 > intY5){
 			intY1 = intY5+20;
 		}
 		
@@ -326,7 +326,7 @@ public class PP{
 			intY1 = intY3-20;
 		}else if(intX1+20 > intX4 && intX1 < intX4+20 && intY1+20 >= intY4 && intY1+20 < intY4+20){
 			intY1 = intY4-20;
-		}else if(intX1+20 > intX3 && intX1 < intX3+20 && intY1+20 >= intY3 && intY1+20 < intY3+20){
+		}else if(intX1+20 > intX5 && intX1 < intX5+20 && intY1+20 >= intY5 && intY1+20 < intY5+20){
 			intY1 = intY5-20;
 		}
 		

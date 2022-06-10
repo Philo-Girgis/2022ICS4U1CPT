@@ -431,6 +431,7 @@ public class SuperSocketMaster{
       socketConnection.removeClient(this);
     }
     public boolean sendText(String strText) {
+		 if(outBuffer != null){
       if(outBuffer.checkError()){    
         socketConnection.removeClient(this);  
         return false;
@@ -438,6 +439,9 @@ public class SuperSocketMaster{
         outBuffer.println(strText);
         return true;
       }
+      	}
+      	return false;
+
     }
     public ClientConnection(SuperSocketMaster parentssm, Socket socketObject, SocketConnection socketConnection){
       this.socketConnection = socketConnection;

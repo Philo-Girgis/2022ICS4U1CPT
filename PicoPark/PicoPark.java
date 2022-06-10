@@ -46,22 +46,28 @@ public class PicoPark implements ActionListener, KeyListener{
 					//send number of players ready
 					//send all coordinates
 					//or maybe that's only when they get coordinates themselves
+					//System.out.println("TEST P1X: "+lobbypanel.intP1X);
+					//System.out.println("TEST P1Y: "+lobbypanel.intP1Y);
 					ssm.sendText("P1X:" +lobbypanel.intP1X);
 					ssm.sendText("P1Y:" +lobbypanel.intP1Y);
 				}else if(lobbypanel.stridentity.equals("Player 2")){
 					//all other players will only be sending coordinates
+					
 					ssm.sendText("P2X:" +lobbypanel.intP2X);
 					ssm.sendText("P2Y:" +lobbypanel.intP2Y);
 				}else if(lobbypanel.stridentity.equals("Player 3")){
 					//all other players will only be sending coordinates
+					
 					ssm.sendText("P3X:" +lobbypanel.intP3X);
 					ssm.sendText("P3Y:" +lobbypanel.intP3Y);
 				}else if(lobbypanel.stridentity.equals("Player 4")){
 					//all other players will only be sending coordinates
+					
 					ssm.sendText("P4X:"+lobbypanel.intP4X);
 					ssm.sendText("P4Y:"+lobbypanel.intP4Y);
 				}else if(lobbypanel.stridentity.equals("Player 5")){
 					//all other players will only be sending coordinates
+					
 					ssm.sendText("P5X:"+lobbypanel.intP5X);
 					ssm.sendText("P5Y:"+lobbypanel.intP5Y);
 				}
@@ -181,19 +187,16 @@ public class PicoPark implements ActionListener, KeyListener{
 		
 		//forget about join for now, set up host lobby first
 		if(evt.getSource() == joinbutton){
-			thetimer.stop();
 			ssm = new SuperSocketMaster(joinfield.getText(), 1111, this);
 			boolean gotConnect = ssm.connect();
 			if(gotConnect){
 				//send text join
 				//ssm.sendText
-				thetimer.start();
 				ssm.sendText("join");
 				//is that it?
 				//cause everything else seems to depend on a message
 				
 			}else{
-				thetimer.start();
 				faillabel.setText("Invalid IP Address");
 			}
 		}
@@ -447,53 +450,71 @@ public class PicoPark implements ActionListener, KeyListener{
 				lobbypanel.intplayers = lobbypanel.intplayers -1;
 			}else if(ssm.readText().substring(0,4).equals("PAR:")){
 				lobbypanel.intready = Integer.parseInt(ssm.readText().substring(4,5));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("PAR:"+lobbypanel.intready);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P1Y:")){
 				lobbypanel.intP1Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 			}else if(ssm.readText().substring(0,4).equals("P1X:")){
 				lobbypanel.intP1X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 			}else if(ssm.readText().substring(0,4).equals("P2Y:")){
 				lobbypanel.intP2Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P2Y:"+lobbypanel.intP2Y);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P2X:")){
 				lobbypanel.intP2X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P2X:"+lobbypanel.intP2X);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P3Y:")){
 				lobbypanel.intP3Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P3Y:"+lobbypanel.intP3Y);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P3X:")){
 				lobbypanel.intP3X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P3X:"+lobbypanel.intP3X);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P4Y:")){
 				lobbypanel.intP4Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P4Y:"+lobbypanel.intP4Y);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P4X:")){
 				lobbypanel.intP4X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P4X:"+lobbypanel.intP4X);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P5Y:")){
 				lobbypanel.intP5Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P5Y:"+lobbypanel.intP5Y);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P5X:")){
 				lobbypanel.intP5X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				/*
 				if(lobbypanel.stridentity.equals("Player 1")){
 					ssm.sendText("P5X:"+lobbypanel.intP5X);
 				}
+				*/
 			}else if(ssm.readText().substring(0,4).equals("P1C:")){
 				chatarea.append("\nP1: "+ssm.readText().substring(4,ssm.readText().length()));
 			}else if(ssm.readText().substring(0,4).equals("P2C:") && !lobbypanel.stridentity.equals("Player 2")){
