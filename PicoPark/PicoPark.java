@@ -135,6 +135,21 @@ public class PicoPark implements ActionListener, KeyListener{
 					ssm.sendText("P5Y:"+levelspanel.intP5Y);
 				}
 				
+				if(levelspanel.strlevel.equals("Win") && levelspanel.intT == 3){
+					strpanel = "lobby";
+					levelspanel.intT = 0;
+					levelspanel.intCD = 0;
+					levelspanel.strlevel = "Level 1";
+					levelspanel.stridentity = "";
+					theframe.setContentPane(lobbypanel);
+					theframe.pack();
+					//chat is here too
+					lobbypanel.add(theScroll);
+					lobbypanel.add(sendbutton);
+					lobbypanel.add(messagefield);
+					
+				}
+				
 			}
 			
 		}
