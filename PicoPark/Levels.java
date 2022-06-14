@@ -64,7 +64,7 @@ public class Levels extends JPanel{
 					g.setColor(Color.WHITE);
 					g.fillRect(intCol*40, intRow*40,40,40);
 				}else if(strread.equals("k")){
-					g.setColor(Color.YELLOW);
+					g.setColor(Color.GRAY);
 					g.fillRect(intCol*40, intRow*40,40,40);
 					//there should only be one "key" per map
 					//if player is standing on key, door is true

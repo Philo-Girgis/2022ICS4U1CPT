@@ -83,7 +83,7 @@ public class Lobby extends JPanel{
 					g.setColor(Color.WHITE);
 					g.fillRect(intCol*40, intRow*40,40,40);
 				}else if(strread.equals("k")){
-					g.setColor(Color.YELLOW);
+					g.setColor(Color.GRAY);
 					g.fillRect(intCol*40, intRow*40,40,40);
 				}else if(strread.equals("d")){
 					g.setColor(Color.BLACK);
