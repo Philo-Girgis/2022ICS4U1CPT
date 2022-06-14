@@ -34,6 +34,14 @@ public class Lobby extends JPanel{
 	int intP5X = 750;
 	int intP5Y = -100;
 	
+	//countdown stuff
+	int intCD = 0;
+	int intT = 0;
+	
+	//once intready reached 5, start a countdown
+	//it should print after the map
+	//it'll use one of the times in pp model
+	
 	//this should hold the code for only one player
 	//depending on their identity, only one set of coordinates will be affected by the player
 	//the rest are just sent here by ssm
@@ -84,6 +92,20 @@ public class Lobby extends JPanel{
 					System.out.println("this string is not recognized");
 				}
 			}	
+		}
+		
+		if(intready == 5){
+			intT = ppmodel.countdown(intCD);
+			g.setFont(bigfont);
+			g.setColor(Color.ORANGE);
+			intCD++;
+			if(intT == 0){
+				g.drawString("Starting in 3",300,325);
+			}else if(intT == 1){
+				g.drawString("Starting in 2",300,325);
+			}else if(intT == 2){
+				g.drawString("Starting in 1",300,325);
+			}
 		}
 		
 		//print players
@@ -308,6 +330,7 @@ public class Lobby extends JPanel{
 	
 	//constructor
 	public Lobby(){
+		super();
 	}
 	
 }

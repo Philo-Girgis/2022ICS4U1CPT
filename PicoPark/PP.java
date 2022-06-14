@@ -1,18 +1,21 @@
 //Application: Pico Park
 //Creators: Philo, Jerry, Alan
-//Last Edited: 6/7/2022
-//Version: 0.55
+//Last Edited: 6/13/2022
+//Version: 0.9
 
+
+//speaking of which, someone pls consider adding descritions here
 //i'm pretty sure this is the only program that requires a javadoc
 import java.io.*;
 
 public class PP{
 	//properties
-	double dblChange1;
-	double dblChange2;
-	double dblChange3;
-	double dblChange4;
-	double dblChange5;
+	double dblChange1 = 0;
+	double dblChange2 = 0;
+	double dblChange3 = 0;
+	double dblChange4 = 0;
+	double dblChange5 = 0;
+	double dblCount = 0;
 	
 	//methods
 	
@@ -133,6 +136,13 @@ public class PP{
 			intX = -100;
 		}
 		return intX;
+	}
+	
+	//three second countdown
+	public int countdown(int intCD){
+		int intT = intCD/45;
+		return intT;
+		
 	}
 	
 	//P1 time method

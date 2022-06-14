@@ -71,10 +71,55 @@ public class PicoPark implements ActionListener, KeyListener{
 					ssm.sendText("P5X:"+lobbypanel.intP5X);
 					ssm.sendText("P5Y:"+lobbypanel.intP5Y);
 				}
+				
+				if(lobbypanel.intready == 5){
+					leavebutton.setEnabled(false);
+					readybutton.setEnabled(false);
+				}
+				
+				if(lobbypanel.intT == 3){
+					//levels begin
+					//reset lobby, but keep in mind that players are still there
+					//pack frame with levels
+					strpanel = "level";
+					lobbypanel.intP1X = 150;
+					lobbypanel.intP1Y = 300;
+					lobbypanel.intP2X = 300;
+					lobbypanel.intP2Y = 300;
+					lobbypanel.intP3X = 450;
+					lobbypanel.intP3Y = 300;
+					lobbypanel.intP4X = 600;
+					lobbypanel.intP4Y = 300;
+					lobbypanel.intP5X = 750;
+					lobbypanel.intP5Y = 300;
+					lobbypanel.dblT = 0;
+					lobbypanel.blnjump = false;
+					lobbypanel.blnstop = false;
+					lobbypanel.intXchange = 0;
+					lobbypanel.blnstart = false;
+					lobbypanel.intCD = 0;
+					lobbypanel.intT = 0;
+					lobbypanel.intready = 0;
+					lobbypanel.strready = "Not Ready";
+					readybutton.setText("Ready");
+					readybutton.setEnabled(true);
+					leavebutton.setEnabled(true);
+					theframe.setContentPane(levelspanel);
+					theframe.pack();
+					//oh right, add the chat to the levels panel
+					levelspanel.add(theScroll);
+					levelspanel.add(sendbutton);
+					levelspanel.add(messagefield);
+					levelspanel.stridentity = lobbypanel.stridentity;
+				}
+				
 			}else if(strpanel.equals("help")){
 				helppanel.repaint();
 			}else if(strpanel.equals("level")){
 				levelspanel.repaint();
+				//will also have to send coordinates, but now from level panel
+				
+				
 			}
 			
 		}
