@@ -1,5 +1,8 @@
 import java.awt.*;
 import javax.swing.*;
+import java.io.*;
+import java.awt.image.*;
+import javax.imageio.*;
 
 public class Help extends JPanel{
 	//properties
@@ -18,6 +21,7 @@ public class Help extends JPanel{
 	boolean blnstop = false;
 	int intXchange = 0;
 	boolean blnstart = false;
+	BufferedImage Spike = null;
 	
 	//40 by 40 squares
 	//1000 by 720 level
@@ -25,7 +29,7 @@ public class Help extends JPanel{
 	//methods
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		String strmaparray[][] = ppmodel.readarray("Help.csv");
+		String strmaparray[][] = ppmodel.readarray("Level3.csv");
 		for(int intRow = 0; intRow < 17; intRow++){
 			for(int intCol = 0; intCol < 25; intCol++){
 				String strread = strmaparray[intRow][intCol];
@@ -41,6 +45,8 @@ public class Help extends JPanel{
 				}else if(strread.equals("d")){
 					g.setColor(Color.BLACK);
 					g.fillRect(intCol*40, intRow*40,40,40);
+				}else if(strread.equals("s")){
+					g.drawImage(Spike, intCol*40, intRow*40, null);
 				}else{
 					System.out.println("this string is not recognized");
 				}
@@ -134,6 +140,11 @@ public class Help extends JPanel{
 	
 	//constructor
 	public Help(){
+		try{
+			Spike = ImageIO.read(new File("Spike.jpg"));
+		}catch(IOException e){
+			System.out.println("Image not found");
+		}
 	}
 	
 }
