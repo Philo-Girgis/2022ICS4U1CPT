@@ -118,7 +118,22 @@ public class PicoPark implements ActionListener, KeyListener{
 			}else if(strpanel.equals("level")){
 				levelspanel.repaint();
 				//will also have to send coordinates, but now from level panel
-				
+				if(levelspanel.stridentity.equals("Player 1")){
+					ssm.sendText("P1X:" +levelspanel.intP1X);
+					ssm.sendText("P1Y:" +levelspanel.intP1Y);
+				}else if(levelspanel.stridentity.equals("Player 2")){					
+					ssm.sendText("P2X:" +levelspanel.intP2X);
+					ssm.sendText("P2Y:" +levelspanel.intP2Y);
+				}else if(levelspanel.stridentity.equals("Player 3")){					
+					ssm.sendText("P3X:" +levelspanel.intP3X);
+					ssm.sendText("P3Y:" +levelspanel.intP3Y);
+				}else if(levelspanel.stridentity.equals("Player 4")){
+					ssm.sendText("P4X:"+levelspanel.intP4X);
+					ssm.sendText("P4Y:"+levelspanel.intP4Y);
+				}else if(levelspanel.stridentity.equals("Player 5")){
+					ssm.sendText("P5X:"+levelspanel.intP5X);
+					ssm.sendText("P5Y:"+levelspanel.intP5Y);
+				}
 				
 			}
 			
@@ -495,105 +510,76 @@ public class PicoPark implements ActionListener, KeyListener{
 				lobbypanel.intplayers = lobbypanel.intplayers -1;
 			}else if(ssm.readText().substring(0,4).equals("PAR:")){
 				lobbypanel.intready = Integer.parseInt(ssm.readText().substring(4,5));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("PAR:"+lobbypanel.intready);
-				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P1Y:")){
-				lobbypanel.intP1Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP1Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP1Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}
 			}else if(ssm.readText().substring(0,4).equals("P1X:")){
-				lobbypanel.intP1X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP1X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP1X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}	
 			}else if(ssm.readText().substring(0,4).equals("P2Y:")){
-				lobbypanel.intP2Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P2Y:"+lobbypanel.intP2Y);
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP2Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP2Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P2X:")){
-				lobbypanel.intP2X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P2X:"+lobbypanel.intP2X);
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP2X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP2X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P3Y:")){
-				lobbypanel.intP3Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P3Y:"+lobbypanel.intP3Y);
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP3Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP3Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P3X:")){
-				lobbypanel.intP3X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P3X:"+lobbypanel.intP3X);
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP3X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP3X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P4Y:")){
-				lobbypanel.intP4Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P4Y:"+lobbypanel.intP4Y);
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP4Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP4Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P4X:")){
-				lobbypanel.intP4X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P4X:"+lobbypanel.intP4X);
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP4X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP4X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P5Y:")){
-				lobbypanel.intP5Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P5Y:"+lobbypanel.intP5Y);
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP5Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level")  && levelspanel.blnCD == false){
+					levelspanel.intP5Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P5X:")){
-				lobbypanel.intP5X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P5X:"+lobbypanel.intP5X);
+				if(strpanel.equals("lobby")){
+					lobbypanel.intP5X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
+				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+					levelspanel.intP5X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P1C:")){
 				chatarea.append("\nP1: "+ssm.readText().substring(4,ssm.readText().length()));
 			}else if(ssm.readText().substring(0,4).equals("P2C:") && !lobbypanel.stridentity.equals("Player 2")){
 				chatarea.append("\nP2: "+ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P2C:"+ssm.readText().substring(4,ssm.readText().length()));
-					System.out.println("server resending P2 message to all clients");
-				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P3C:") && !lobbypanel.stridentity.equals("Player 3")){
 				chatarea.append("\nP3: "+ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P3C:"+ssm.readText().substring(4,ssm.readText().length()));
-					System.out.println("server resending P3 message to all clients");
-				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P4C:") && !lobbypanel.stridentity.equals("Player 4")){
 				chatarea.append("\nP4: "+ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P4C:"+ssm.readText().substring(4,ssm.readText().length()));
-					System.out.println("server resending P4 message to all clients");
-				}
-				*/
 			}else if(ssm.readText().substring(0,4).equals("P5C:") && !lobbypanel.stridentity.equals("Player 5")){
 				chatarea.append("\nP5: "+ssm.readText().substring(4,ssm.readText().length()));
-				/*
-				if(lobbypanel.stridentity.equals("Player 1")){
-					ssm.sendText("P5C:"+ssm.readText().substring(4,ssm.readText().length()));
-					System.out.println("server resending P5 message to all clients");
-				}
-				*/
 			}
 			
 			//we're also gonna need to do chat messages
@@ -622,6 +608,14 @@ public class PicoPark implements ActionListener, KeyListener{
 			}else if(evt.getKeyChar() == 'd'){
 				lobbypanel.intXchange = 5;
 			}
+		}else if(strpanel.equals("level") && levelspanel.blnstart == true){
+			if(evt.getKeyChar() == 'w' && levelspanel.blnstop == true){
+				levelspanel.blnjump = true;
+			}else if(evt.getKeyChar() == 'a'){
+				levelspanel.intXchange = -5;
+			}else if(evt.getKeyChar() == 'd'){
+				levelspanel.intXchange = 5;
+			}
 		}
 	}
 	
@@ -637,6 +631,12 @@ public class PicoPark implements ActionListener, KeyListener{
 				lobbypanel.intXchange = 0;
 			}else if(evt.getKeyChar() == 'd'){
 				lobbypanel.intXchange = 0;
+			}
+		}else if(strpanel.equals("level")){
+			if(evt.getKeyChar() == 'a'){
+				levelspanel.intXchange = 0;
+			}else if(evt.getKeyChar() == 'd'){
+				levelspanel.intXchange = 0;
 			}
 		}
 	}

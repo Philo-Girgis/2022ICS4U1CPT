@@ -123,6 +123,16 @@ public class Help extends JPanel{
 		
 		//stop check comes at the end as usual
 		
+		//help menu needs to check for key and door as well
+		//change of plans
+		//what if, the some one has to stand in the key for the door to be open
+		//help menu will just be parkour
+		//this makes teamwork more important
+		//speaking of which, help menu gonna need some rework
+		//help menu will consist of more parkour, but it will feature the door mechanic
+		//they'll just never be able to reach the door
+		//gonna also add spikes
+		
 		
 		g.setColor(Color.ORANGE);
 		//underneath level
@@ -140,6 +150,7 @@ public class Help extends JPanel{
 	
 	//constructor
 	public Help(){
+		super();
 		try{
 			Spike = ImageIO.read(new File("Spike.jpg"));
 		}catch(IOException e){
