@@ -11,6 +11,7 @@ public class Levels extends JPanel{
 	Font superfont = new Font(null, 0, 100);
 	BufferedImage Spike = null;
 	boolean blndoor = false;
+	boolean blnnext = false;
 	
 	//important things
 	String stridentity = "";
@@ -54,6 +55,24 @@ public class Levels extends JPanel{
 		//so instead, some one needs to stand in the golden area, or now it can be grey, so that someone can activate the door
 		//teamwork go brr
 		String strmaparray[][] = ppmodel.readarray(strFile);
+		
+		blndoor = true;
+		for(int intRow = 0; intRow < 17; intRow++){
+			for(int intCol = 0; intCol < 25; intCol++){
+				String strread = strmaparray[intRow][intCol];
+				if(strread.equals("k")){
+					if(intP1X+20 > intCol*40 && intP1X < intCol*40+40 && intP1Y+20 > intRow*40 && intP1Y < intRow*40+40){
+					}else if(intP2X+20 > intCol*40 && intP2X < intCol*40+40 && intP2Y+20 > intRow*40 && intP2Y < intRow*40+40){
+					}else if(intP3X+20 > intCol*40 && intP3X < intCol*40+40 && intP3Y+20 > intRow*40 && intP3Y < intRow*40+40){
+					}else if(intP4X+20 > intCol*40 && intP4X < intCol*40+40 && intP4Y+20 > intRow*40 && intP4Y < intRow*40+40){
+					}else if(intP5X+20 > intCol*40 && intP5X < intCol*40+40 && intP5Y+20 > intRow*40 && intP5Y < intRow*40+40){
+					}else{
+						blndoor = false;
+					}
+				}
+			}
+		}
+		
 		for(int intRow = 0; intRow < 17; intRow++){
 			for(int intCol = 0; intCol < 25; intCol++){
 				String strread = strmaparray[intRow][intCol];
@@ -71,12 +90,117 @@ public class Levels extends JPanel{
 				}else if(strread.equals("d")){
 					//if door is true, door is printed
 					//else, it's covered as background
-					g.setColor(Color.BLACK);
+					if(blndoor == true){
+						g.setColor(Color.BLACK);
+						if(intP1X+20 > intCol*40 && intP1X < intCol*40+40 && intP1Y+20 > intRow*40 && intP1Y < intRow*40+40){
+							blnnext = true;
+						}else if(intP2X+20 > intCol*40 && intP2X < intCol*40+40 && intP2Y+20 > intRow*40 && intP2Y < intRow*40+40){
+							blnnext = true;
+						}else if(intP3X+20 > intCol*40 && intP3X < intCol*40+40 && intP3Y+20 > intRow*40 && intP3Y < intRow*40+40){
+							blnnext = true;
+						}else if(intP4X+20 > intCol*40 && intP4X < intCol*40+40 && intP4Y+20 > intRow*40 && intP4Y < intRow*40+40){
+							blnnext = true;
+						}else if(intP5X+20 > intCol*40 && intP5X < intCol*40+40 && intP5Y+20 > intRow*40 && intP5Y < intRow*40+40){
+							blnnext = true;
+						}
+					}else{
+						g.setColor(Color.WHITE);
+					}
 					g.fillRect(intCol*40, intRow*40,40,40);
 					//if player is standing in door, because door is visible, then it becomes the next level
 					//spawn gets reset
+					if(blnnext == true){
+						//reset
+						blnnext = false;
+						dblT = 0;
+						blnjump = false;
+						blnstop = false;
+						intXchange = 0;
+						blnstart = false;
+
+						intP1X = 80;
+						intP1Y = -20;
+						intP2X = 80;
+						intP2Y = -40;
+						intP3X = 80;
+						intP3Y = -60;
+						intP4X = 80;
+						intP4Y = -80;
+						intP5X = 80;
+						intP5Y = -100;
+						
+						blnCD = true;
+						if(strlevel.equals("Level 1")){
+							strlevel = "Level 2";
+							strFile = "Level2.csv";
+						}else if(strlevel.equals("Level 2")){
+							strlevel = "Level 3";
+							strFile = "Level3.csv";
+						}else if(strlevel.equals("Level 3")){
+							strlevel = "Level 4";
+							strFile = "Level4.csv";
+						}else if(strlevel.equals("Level 4")){
+							strlevel = "Level 5";
+							strFile = "Level5.csv";
+						}else if(strlevel.equals("Level 5")){
+							strlevel = "Win";
+							strFile = "Level1.csv";
+						}
+					}
+					
 				}else if(strread.equals("s")){
 					g.drawImage(Spike, intCol*40, intRow*40, null);
+					if(stridentity.equals("Player 1")){
+						if(intP1X+20 > intCol*40 && intP1X < intCol*40+40 && intP1Y+20 > intRow*40 && intP1Y < intRow*40+40){
+							intP1X = 80;
+							intP1Y = 100;
+							dblT = 0;
+							blnjump = false;
+							blnstop = false;
+							intXchange = 0;
+							blnstart = false;
+						}
+					}else if(stridentity.equals("Player 2")){
+						if(intP2X+20 > intCol*40 && intP2X < intCol*40+40 && intP2Y+20 > intRow*40 && intP2Y < intRow*40+40){
+							intP2X = 80;
+							intP2Y = 150;
+							dblT = 0;
+							blnjump = false;
+							blnstop = false;
+							intXchange = 0;
+							blnstart = false;
+						}
+					}else if(stridentity.equals("Player 3")){
+						if(intP3X+20 > intCol*40 && intP3X < intCol*40+40 && intP3Y+20 > intRow*40 && intP3Y < intRow*40+40){
+							intP3X = 80;
+							intP3Y = 200;
+							dblT = 0;
+							blnjump = false;
+							blnstop = false;
+							intXchange = 0;
+							blnstart = false;
+						}
+					}else if(stridentity.equals("Player 4")){
+						if(intP4X+20 > intCol*40 && intP4X < intCol*40+40 && intP4Y+20 > intRow*40 && intP4Y < intRow*40+40){
+							intP4X = 80;
+							intP4Y = 250;
+							dblT = 0;
+							blnjump = false;
+							blnstop = false;
+							intXchange = 0;
+							blnstart = false;
+						}
+					}else if(stridentity.equals("Plyaer 5")){
+						if(intP5X+20 > intCol*40 && intP5X < intCol*40+40 && intP5Y+20 > intRow*40 && intP5Y < intRow*40+40){
+							intP5X = 80;
+							intP5Y = 300;
+							dblT = 0;
+							blnjump = false;
+							blnstop = false;
+							intXchange = 0;
+							blnstart = false;
+						}
+					}
 				}else{
 					System.out.println("this string is not recognized");
 					//may update this based on jerry's additions
@@ -126,11 +250,11 @@ public class Levels extends JPanel{
 			
 			g.setFont(bigfont);
 			if(intT == 0){
-				g.drawString("Returning to Lobby in 3",200,400);
+				g.drawString("Returning to Lobby in 3",250,400);
 			}else if(intT == 1){
-				g.drawString("Returning to Lobby in 2",300,400);
+				g.drawString("Returning to Lobby in 2",250,400);
 			}else if(intT == 2){
-				g.drawString("Returning to Lobby in 1",300,400);
+				g.drawString("Returning to Lobby in 1",250,400);
 			}
 		}
 		
@@ -140,17 +264,11 @@ public class Levels extends JPanel{
 			blnCD = false;
 			intT = 0;
 			intCD = 0;
-			if(stridentity.equals("Player 1")){
-				intP1Y = 100;
-			}else if(stridentity.equals("Player 2")){
-				intP2Y = 150;
-			}else if(stridentity.equals("Player 3")){
-				intP3Y = 200;
-			}else if(stridentity.equals("Player 4")){
-				intP4Y = 250;
-			}else if(stridentity.equals("Player 5")){
-				intP5Y = 300;
-			}
+			intP1Y = 100;
+			intP2Y = 150;
+			intP3Y = 200;
+			intP4Y = 250;
+			intP5Y = 300;
 			
 		}
 		
