@@ -8,6 +8,7 @@ public class Help extends JPanel{
 	//properties
 	PP ppmodel = new PP();
 	Font bigfont = new Font(null, 0, 50);
+	boolean blndoor = false;
 	
 	//fun fact, this ppmodel is only applicable to this program
 	//can't alter it from anywhere else
@@ -29,7 +30,21 @@ public class Help extends JPanel{
 	//methods
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		String strmaparray[][] = ppmodel.readarray("Level3.csv");
+		String strmaparray[][] = ppmodel.readarray("Help.csv");
+		
+		blndoor = true;
+		for(int intRow = 0; intRow < 17; intRow++){
+			for(int intCol = 0; intCol < 25; intCol++){
+				String strread = strmaparray[intRow][intCol];
+				if(strread.equals("k")){
+					if(intPX+20 > intCol*40 && intPX < intCol*40+40 && intPY+20 > intRow*40 && intPY < intRow*40+40){
+					}else{
+						blndoor = false;
+					}
+				}
+			}
+		}
+		
 		for(int intRow = 0; intRow < 17; intRow++){
 			for(int intCol = 0; intCol < 25; intCol++){
 				String strread = strmaparray[intRow][intCol];
@@ -40,13 +55,26 @@ public class Help extends JPanel{
 					g.setColor(Color.WHITE);
 					g.fillRect(intCol*40, intRow*40,40,40);
 				}else if(strread.equals("k")){
-					g.setColor(Color.YELLOW);
+					g.setColor(Color.GRAY);
 					g.fillRect(intCol*40, intRow*40,40,40);
 				}else if(strread.equals("d")){
-					g.setColor(Color.BLACK);
+					if(blndoor == true){
+						g.setColor(Color.BLACK);
+					}else{
+						g.setColor(Color.WHITE);
+					}
 					g.fillRect(intCol*40, intRow*40,40,40);
 				}else if(strread.equals("s")){
 					g.drawImage(Spike, intCol*40, intRow*40, null);
+					if(intPX+20 > intCol*40 && intPX < intCol*40+40 && intPY+20 > intRow*40 && intPY < intRow*40+40){
+						intPX = 80;
+						intPY = 80;
+						dblT = 0;
+						blnjump = false;
+						blnstop = false;
+						intXchange = 0;
+						blnstart = false;
+					}
 				}else{
 					System.out.println("this string is not recognized");
 				}
@@ -123,6 +151,16 @@ public class Help extends JPanel{
 		
 		//stop check comes at the end as usual
 		
+		//help menu needs to check for key and door as well
+		//change of plans
+		//what if, the some one has to stand in the key for the door to be open
+		//help menu will just be parkour
+		//this makes teamwork more important
+		//speaking of which, help menu gonna need some rework
+		//help menu will consist of more parkour, but it will feature the door mechanic
+		//they'll just never be able to reach the door
+		//gonna also add spikes
+		
 		
 		g.setColor(Color.ORANGE);
 		//underneath level
@@ -140,6 +178,7 @@ public class Help extends JPanel{
 	
 	//constructor
 	public Help(){
+		super();
 		try{
 			Spike = ImageIO.read(new File("Spike.jpg"));
 		}catch(IOException e){

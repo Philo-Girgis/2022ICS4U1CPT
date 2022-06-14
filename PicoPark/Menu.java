@@ -148,6 +148,7 @@ public class Menu extends JPanel{
 	
 	//constructor
 	public Menu(){
+		super();
 	}
 	
 }
