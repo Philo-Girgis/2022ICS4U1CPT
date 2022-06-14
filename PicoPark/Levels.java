@@ -109,44 +109,6 @@ public class Levels extends JPanel{
 					g.fillRect(intCol*40, intRow*40,40,40);
 					//if player is standing in door, because door is visible, then it becomes the next level
 					//spawn gets reset
-					if(blnnext == true){
-						//reset
-						blnnext = false;
-						dblT = 0;
-						blnjump = false;
-						blnstop = false;
-						intXchange = 0;
-						blnstart = false;
-
-						intP1X = 80;
-						intP1Y = -20;
-						intP2X = 80;
-						intP2Y = -40;
-						intP3X = 80;
-						intP3Y = -60;
-						intP4X = 80;
-						intP4Y = -80;
-						intP5X = 80;
-						intP5Y = -100;
-						
-						blnCD = true;
-						if(strlevel.equals("Level 1")){
-							strlevel = "Level 2";
-							strFile = "Level2.csv";
-						}else if(strlevel.equals("Level 2")){
-							strlevel = "Level 3";
-							strFile = "Level3.csv";
-						}else if(strlevel.equals("Level 3")){
-							strlevel = "Level 4";
-							strFile = "Level4.csv";
-						}else if(strlevel.equals("Level 4")){
-							strlevel = "Level 5";
-							strFile = "Level5.csv";
-						}else if(strlevel.equals("Level 5")){
-							strlevel = "Win";
-							strFile = "Level1.csv";
-						}
-					}
 					
 				}else if(strread.equals("s")){
 					g.drawImage(Spike, intCol*40, intRow*40, null);
@@ -221,6 +183,67 @@ public class Levels extends JPanel{
 		//the countdown only activates when a level is complete
 		//speaking of which, i need to add that logic
 		
+		//print players
+		g.setColor(Color.RED);
+		g.fillRect(intP1X,intP1Y,20,20);
+		g.setColor(Color.ORANGE);
+		g.fillRect(intP2X,intP2Y,20,20);
+		g.setColor(Color.YELLOW);
+		g.fillRect(intP3X,intP3Y,20,20);
+		g.setColor(Color.BLUE);
+		g.fillRect(intP4X,intP4Y,20,20);
+		g.setColor(Color.GREEN);
+		g.fillRect(intP5X,intP5Y,20,20);
+		
+		//we'll have to write more ssm code
+		//instead of changing bln next, we may have to do things more forcefully
+		//that way, everyone will be one the same page
+		//in theory
+		//i still don't understand how some people didn't get the blnnext message
+		//everyone should have been able to read it...
+		//unless the message flew over there head...
+		//basically, this is a connection problem
+		//i need to do playtesting with other devices
+		//cause the same device misses messages on occasion
+		//or, i can update them whenever they get an ssm
+		//like they lag out and then suddenly update
+		//that may be the only thing i can do
+		//or, i can create that level select thing mr cadawas suggested
+		//that way everyone returns to said menu at the same time
+		//the menu would have to be a new jpanel
+		//oh boy
+		//let's try this one last time
+		
+		if(blnnext == true){
+			//reset
+			dblT = 0;
+			blnjump = false;
+			blnstop = false;
+			intXchange = 0;
+			blnstart = false;
+						
+			if(strlevel.equals("Level 1")){
+				strlevel = "Level 2";
+				strFile = "Level2.csv";
+			}else if(strlevel.equals("Level 2")){
+				strlevel = "Level 3";
+				strFile = "Level3.csv";
+			}else if(strlevel.equals("Level 3")){
+				strlevel = "Level 4";
+				strFile = "Level4.csv";
+			}else if(strlevel.equals("Level 4")){
+				strlevel = "Level 5";
+				strFile = "Level5.csv";
+			}else if(strlevel.equals("Level 5")){
+				strlevel = "Win";
+				strFile = "Level1.csv";
+			}
+			
+			blnCD = true;
+			blnnext = false;
+		}
+		
+		
 		if(blnCD == true){
 			g.setColor(Color.ORANGE);
 			g.fillRect(0,0,1000,700);
@@ -235,6 +258,22 @@ public class Levels extends JPanel{
 				g.drawString("Starting in 3",300,400);
 			}else if(intT == 1){
 				g.drawString("Starting in 2",300,400);
+				if(stridentity.equals("Player 1")){
+					intP1X = 80;
+					intP1Y = -20;
+				}else if(stridentity.equals("Player 2")){
+					intP2X = 80;
+					intP2Y = -40;
+				}else if(stridentity.equals("Player 3")){
+					intP3X = 80;
+					intP3Y = -60;
+				}else if(stridentity.equals("Player 4")){
+					intP4X = 80;
+					intP4Y = -80;
+				}else if(stridentity.equals("Player 5")){
+					intP5X = 80;
+					intP5Y = -100;
+				}
 			}else if(intT == 2){
 				g.drawString("Starting in 1",300,400);
 			}
@@ -253,36 +292,49 @@ public class Levels extends JPanel{
 				g.drawString("Returning to Lobby in 3",250,400);
 			}else if(intT == 1){
 				g.drawString("Returning to Lobby in 2",250,400);
+				if(stridentity.equals("Player 1")){
+					intP1X = 80;
+					intP1Y = -20;
+				}else if(stridentity.equals("Player 2")){
+					intP2X = 80;
+					intP2Y = -40;
+				}else if(stridentity.equals("Player 3")){
+					intP3X = 80;
+					intP3Y = -60;
+				}else if(stridentity.equals("Player 4")){
+					intP4X = 80;
+					intP4Y = -80;
+				}else if(stridentity.equals("Player 5")){
+					intP5X = 80;
+					intP5Y = -100;
+				}
 			}else if(intT == 2){
 				g.drawString("Returning to Lobby in 1",250,400);
 			}
 		}
 		
+		
+		
 		//spawn players
 		//spawn is super janky... but it works?
 		if(intT == 3 && !strlevel.equals("Win")){
-			blnCD = false;
 			intT = 0;
 			intCD = 0;
-			intP1Y = 100;
-			intP2Y = 150;
-			intP3Y = 200;
-			intP4Y = 250;
-			intP5Y = 300;
+			if(stridentity.equals("Player 1")){
+				intP1Y = 100;
+			}else if(stridentity.equals("Player 2")){
+				intP2Y = 150;
+			}else if(stridentity.equals("Player 3")){
+				intP3Y = 200;
+			}else if(stridentity.equals("Player 4")){
+				intP4Y = 250;
+			}else if(stridentity.equals("Player 5")){
+				intP5Y = 300;
+			}
 			
+			blnCD = false;
 		}
 		
-		//print players
-		g.setColor(Color.RED);
-		g.fillRect(intP1X,intP1Y,20,20);
-		g.setColor(Color.ORANGE);
-		g.fillRect(intP2X,intP2Y,20,20);
-		g.setColor(Color.YELLOW);
-		g.fillRect(intP3X,intP3Y,20,20);
-		g.setColor(Color.BLUE);
-		g.fillRect(intP4X,intP4Y,20,20);
-		g.setColor(Color.GREEN);
-		g.fillRect(intP5X,intP5Y,20,20);
 		
 		if(blnCD == false){
 			if(stridentity.equals("Player 1")){
@@ -453,8 +505,6 @@ public class Levels extends JPanel{
 				intP5Y = ppmodel.adjustY(strmaparray, intP5X, intP5Y);
 			}
 		}
-		
-		//thinking of making it so that a player has to be within the gold area for the door to activate
 		
 		
 		

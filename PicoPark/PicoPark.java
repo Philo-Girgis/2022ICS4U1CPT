@@ -117,7 +117,9 @@ public class PicoPark implements ActionListener, KeyListener{
 				helppanel.repaint();
 			}else if(strpanel.equals("level")){
 				levelspanel.repaint();
+				
 				//will also have to send coordinates, but now from level panel
+				
 				if(levelspanel.stridentity.equals("Player 1")){
 					ssm.sendText("P1X:" +levelspanel.intP1X);
 					ssm.sendText("P1Y:" +levelspanel.intP1Y);
@@ -134,6 +136,7 @@ public class PicoPark implements ActionListener, KeyListener{
 					ssm.sendText("P5X:"+levelspanel.intP5X);
 					ssm.sendText("P5Y:"+levelspanel.intP5Y);
 				}
+				
 				
 				if(levelspanel.strlevel.equals("Win") && levelspanel.intT == 3){
 					strpanel = "lobby";
@@ -388,6 +391,7 @@ public class PicoPark implements ActionListener, KeyListener{
 			//why?
 			//it works now... and i don't know why...
 			//guess i just won't touch it
+			
 			if(ssm.readText().equals("join") && lobbypanel.stridentity.equals("Player 1")){
 				if(lobbypanel.intplayers < 5){
 					//check which players are active
@@ -528,61 +532,61 @@ public class PicoPark implements ActionListener, KeyListener{
 			}else if(ssm.readText().substring(0,4).equals("P1Y:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP1Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP1Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P1X:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP1X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP1X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}	
 			}else if(ssm.readText().substring(0,4).equals("P2Y:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP2Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP2Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P2X:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP2X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP2X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P3Y:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP3Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP3Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P3X:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP3X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP3X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P4Y:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP4Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP4Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P4X:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP4X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP4X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P5Y:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP5Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level")  && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP5Y = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P5X:")){
 				if(strpanel.equals("lobby")){
 					lobbypanel.intP5X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
-				}else if(strpanel.equals("level") && levelspanel.blnCD == false){
+				}else if(strpanel.equals("level")){
 					levelspanel.intP5X = Integer.parseInt(ssm.readText().substring(4,ssm.readText().length()));
 				}
 			}else if(ssm.readText().substring(0,4).equals("P1C:")){
@@ -596,6 +600,7 @@ public class PicoPark implements ActionListener, KeyListener{
 			}else if(ssm.readText().substring(0,4).equals("P5C:") && !lobbypanel.stridentity.equals("Player 5")){
 				chatarea.append("\nP5: "+ssm.readText().substring(4,ssm.readText().length()));
 			}
+			
 			
 			//we're also gonna need to do chat messages
 			//oh boy
