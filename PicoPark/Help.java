@@ -174,7 +174,14 @@ public class Help extends JPanel{
 		g.setFont(bigfont);
 		g.drawString("Help",1060,100);
 		//print help instructions
-		
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		g.drawString("Use A & D to move your", 1010, 200);
+		g.drawString("character left and right.", 1010, 225);
+		g.drawString("Use W to jump.", 1010, 250);
+		g.drawString("Stand on the all of the buttons", 1002, 280);
+		g.drawString("(grey blocks) to make the", 1010, 305);
+		g.drawString("door appear.", 1010, 330);
+		g.drawString("ENJOY!", 1085, 420);
 	}
 	
 	//constructor
