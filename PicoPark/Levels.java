@@ -524,7 +524,8 @@ public class Levels extends JPanel{
 	public Levels(){
 		super();
 		try{
-			Spike = ImageIO.read(new File("Spike.jpg"));
+			//Spike = ImageIO.read(new File("Spike.jpg"));
+			Spike = ImageIO.read(this.getClass().getResourceAsStream("Spike.jpg"));
 		}catch(IOException e){
 			System.out.println("Image not found");
 		}

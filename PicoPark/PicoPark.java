@@ -82,16 +82,62 @@ public class PicoPark implements ActionListener, KeyListener{
 					//reset lobby, but keep in mind that players are still there
 					//pack frame with levels
 					strpanel = "level";
-					lobbypanel.intP1X = 150;
-					lobbypanel.intP1Y = 300;
-					lobbypanel.intP2X = 300;
-					lobbypanel.intP2Y = 300;
-					lobbypanel.intP3X = 450;
-					lobbypanel.intP3Y = 300;
-					lobbypanel.intP4X = 600;
-					lobbypanel.intP4Y = 300;
-					lobbypanel.intP5X = 750;
-					lobbypanel.intP5Y = 300;
+					if(lobbypanel.stridentity.equals("Player 1")){
+						lobbypanel.intP1X = 150;
+						lobbypanel.intP1Y = 300;
+						lobbypanel.intP2X = 80;
+						lobbypanel.intP2Y = -40;
+						lobbypanel.intP3X = 80;
+						lobbypanel.intP3Y = -60;
+						lobbypanel.intP4X = 80;
+						lobbypanel.intP4Y = -80;
+						lobbypanel.intP5X = 80;
+						lobbypanel.intP5Y = -100;
+					}else if(lobbypanel.stridentity.equals("Player 2")){
+						lobbypanel.intP1X = 80;
+						lobbypanel.intP1Y = -20;
+						lobbypanel.intP2X = 300;
+						lobbypanel.intP2Y = 300;
+						lobbypanel.intP3X = 80;
+						lobbypanel.intP3Y = -60;
+						lobbypanel.intP4X = 80;
+						lobbypanel.intP4Y = -80;
+						lobbypanel.intP5X = 80;
+						lobbypanel.intP5Y = -100;
+					}else if(lobbypanel.stridentity.equals("Player 3")){
+						lobbypanel.intP1X = 80;
+						lobbypanel.intP1Y = -20;
+						lobbypanel.intP2X = 80;
+						lobbypanel.intP2Y = -40;
+						lobbypanel.intP3X = 450;
+						lobbypanel.intP3Y = 300;
+						lobbypanel.intP4X = 80;
+						lobbypanel.intP4Y = -80;
+						lobbypanel.intP5X = 80;
+						lobbypanel.intP5Y = -100;
+					}else if(lobbypanel.stridentity.equals("Player 4")){
+						lobbypanel.intP1X = 80;
+						lobbypanel.intP1Y = -20;
+						lobbypanel.intP2X = 80;
+						lobbypanel.intP2Y = -40;
+						lobbypanel.intP3X = 80;
+						lobbypanel.intP3Y = -60;
+						lobbypanel.intP4X = 600;
+						lobbypanel.intP4Y = 300;
+						lobbypanel.intP5X = 80;
+						lobbypanel.intP5Y = -100;
+					}else if(lobbypanel.stridentity.equals("Player 5")){
+						lobbypanel.intP1X = 80;
+						lobbypanel.intP1Y = -20;
+						lobbypanel.intP2X = 80;
+						lobbypanel.intP2Y = -40;
+						lobbypanel.intP3X = 80;
+						lobbypanel.intP3Y = -60;
+						lobbypanel.intP4X = 80;
+						lobbypanel.intP4Y = -80;
+						lobbypanel.intP5X = 750;
+						lobbypanel.intP5Y = 300;
+					}
 					lobbypanel.dblT = 0;
 					lobbypanel.blnjump = false;
 					lobbypanel.blnstop = false;

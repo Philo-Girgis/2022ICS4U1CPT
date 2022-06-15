@@ -30,7 +30,7 @@ public class Help extends JPanel{
 	//methods
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		String strmaparray[][] = ppmodel.readarray("Level4.csv");
+		String strmaparray[][] = ppmodel.readarray("Help.csv");
 		
 		blndoor = true;
 		for(int intRow = 0; intRow < 17; intRow++){
@@ -173,6 +173,7 @@ public class Help extends JPanel{
 		g.setColor(Color.ORANGE);
 		g.setFont(bigfont);
 		g.drawString("Help",1060,100);
+		//print help instructions
 		
 	}
 	
@@ -180,7 +181,8 @@ public class Help extends JPanel{
 	public Help(){
 		super();
 		try{
-			Spike = ImageIO.read(new File("Spike.jpg"));
+			//Spike = ImageIO.read(new File("Spike.jpg"));
+			Spike = ImageIO.read(this.getClass().getResourceAsStream("Spike.jpg"));
 		}catch(IOException e){
 			System.out.println("Image not found");
 		}
