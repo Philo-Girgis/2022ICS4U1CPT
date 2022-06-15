@@ -181,7 +181,9 @@ public class Help extends JPanel{
 		g.drawString("Stand on the all of the buttons", 1002, 280);
 		g.drawString("(grey blocks) to make the", 1010, 305);
 		g.drawString("door appear.", 1010, 330);
-		g.drawString("ENJOY!", 1085, 420);
+		g.drawString("One player must each the door", 1010, 355);
+		g.drawString("to get to the next level.", 1010, 380);
+		g.drawString("ENJOY!", 1085, 470);
 	}
 	
 	//constructor
