@@ -32,7 +32,9 @@ public class PP{
 		//might need to make changed to read file code because of jar
 		String strmaparray[][] = new String[17][25];
 		try{
-			BufferedReader readfile = new BufferedReader(new FileReader(strfilename));
+			InputStream input = getClass().getResourceAsStream(strfilename);
+			BufferedReader readfile = new BufferedReader(new InputStreamReader(input));
+			//BufferedReader readfile = new BufferedReader(new FileReader(strfilename));
 			for(int intRow = 0; intRow < 17; intRow++){
 				String strline = readfile.readLine();
 				String strRow[] = strline.split(",");

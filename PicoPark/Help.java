@@ -67,7 +67,7 @@ public class Help extends JPanel{
 					g.fillRect(intCol*40, intRow*40,40,40);
 				}else if(strread.equals("s")){
 					g.drawImage(Spike, intCol*40, intRow*40, null);
-					if(intPX+20 > intCol*40 && intPX < intCol*40+40 && intPY+15 > intRow*40 && intPY < intRow*40+40){
+					if(intPX+20 > intCol*40 && intPX < intCol*40+40 && intPY+20 > intRow*40 && intPY < intRow*40+40){
 						intPX = 80;
 						intPY = 80;
 						dblT = 0;
