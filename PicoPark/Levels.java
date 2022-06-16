@@ -94,13 +94,13 @@ public class Levels extends JPanel{
 						g.setColor(Color.BLACK);
 						if(intP1X+20 > intCol*40 && intP1X < intCol*40+40 && intP1Y+20 > intRow*40 && intP1Y < intRow*40+40){
 							blnnext = true;
-						}else if(intP2X+20 > intCol*40 && intP2X < intCol*40+40 && intP2Y+15 > intRow*40 && intP2Y < intRow*40+40){
+						}else if(intP2X+20 > intCol*40 && intP2X < intCol*40+40 && intP2Y+20 > intRow*40 && intP2Y < intRow*40+40){
 							blnnext = true;
-						}else if(intP3X+20 > intCol*40 && intP3X < intCol*40+40 && intP3Y+15 > intRow*40 && intP3Y < intRow*40+40){
+						}else if(intP3X+20 > intCol*40 && intP3X < intCol*40+40 && intP3Y+20 > intRow*40 && intP3Y < intRow*40+40){
 							blnnext = true;
-						}else if(intP4X+20 > intCol*40 && intP4X < intCol*40+40 && intP4Y+15 > intRow*40 && intP4Y < intRow*40+40){
+						}else if(intP4X+20 > intCol*40 && intP4X < intCol*40+40 && intP4Y+20 > intRow*40 && intP4Y < intRow*40+40){
 							blnnext = true;
-						}else if(intP5X+20 > intCol*40 && intP5X < intCol*40+40 && intP5Y+15 > intRow*40 && intP5Y < intRow*40+40){
+						}else if(intP5X+20 > intCol*40 && intP5X < intCol*40+40 && intP5Y+20 > intRow*40 && intP5Y < intRow*40+40){
 							blnnext = true;
 						}
 					}else{
@@ -152,7 +152,7 @@ public class Levels extends JPanel{
 							intXchange = 0;
 							blnstart = false;
 						}
-					}else if(stridentity.equals("Plyaer 5")){
+					}else if(stridentity.equals("Player 5")){
 						if(intP5X+20 > intCol*40 && intP5X < intCol*40+40 && intP5Y+20 > intRow*40 && intP5Y < intRow*40+40){
 							intP5X = 80;
 							intP5Y = 300;
