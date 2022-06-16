@@ -244,7 +244,7 @@ public class Levels extends JPanel{
 		}
 		
 		
-		if(blnCD == true){
+		if(blnCD == true && !strlevel.equals("Win")){
 			g.setColor(Color.ORANGE);
 			g.fillRect(0,0,1000,700);
 			intT = ppmodel.countdown(intCD);
@@ -280,7 +280,7 @@ public class Levels extends JPanel{
 		}else if(strlevel.equals("Win")){
 			//countdown, but this time return to menu
 			g.setColor(Color.ORANGE);
-			g.drawRect(0,0,1000,700);
+			g.fillRect(0,0,1000,700);
 			intT = ppmodel.countdown(intCD);
 			intCD++;
 			g.setColor(Color.WHITE);
