@@ -29,6 +29,7 @@ public class PP{
 	//read array method
 	/** creates an array by reading the given file */
 	public String[][] readarray(String strfilename){
+		//might need to make changed to read file code because of jar
 		String strmaparray[][] = new String[17][25];
 		try{
 			BufferedReader readfile = new BufferedReader(new FileReader(strfilename));

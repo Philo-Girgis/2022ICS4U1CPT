@@ -9,6 +9,7 @@ public class Help extends JPanel{
 	PP ppmodel = new PP();
 	Font bigfont = new Font(null, 0, 50);
 	boolean blndoor = false;
+	Font normalfont = new Font(null, 0, 15);
 	
 	//fun fact, this ppmodel is only applicable to this program
 	//can't alter it from anywhere else
@@ -66,7 +67,7 @@ public class Help extends JPanel{
 					g.fillRect(intCol*40, intRow*40,40,40);
 				}else if(strread.equals("s")){
 					g.drawImage(Spike, intCol*40, intRow*40, null);
-					if(intPX+20 > intCol*40 && intPX < intCol*40+40 && intPY+20 > intRow*40 && intPY < intRow*40+40){
+					if(intPX+20 > intCol*40 && intPX < intCol*40+40 && intPY+15 > intRow*40 && intPY < intRow*40+40){
 						intPX = 80;
 						intPY = 80;
 						dblT = 0;
@@ -174,6 +175,28 @@ public class Help extends JPanel{
 		g.setFont(bigfont);
 		g.drawString("Help",1060,100);
 		//print help instructions
+		g.setFont(normalfont);
+		g.drawString("Hold 'a' to move left", 1010, 150);
+		g.drawString("Hold 'd' to move right", 1010, 175);
+		g.drawString("Press 'w' to jump", 1010, 200);
+		g.drawString("Don't touch the spikes", 1010, 250);
+		g.drawImage(Spike, 1175, 225, null);
+		g.drawString("Gray reveals the door", 1010, 325);
+		g.setColor(Color.GRAY);
+		g.fillRect(1175,300,40,40);
+		g.setColor(Color.ORANGE);
+		g.drawString("Get to the door", 1010, 400);
+		g.setColor(Color.BLACK);
+		g.fillRect(1175,375,40,40);
+		g.setColor(Color.ORANGE);
+		g.drawString("You may need other players", 1010, 475);
+		g.fillRect(1025,500,20,20);
+		g.setColor(Color.YELLOW);
+		g.fillRect(1075,500,20,20);
+		g.setColor(Color.BLUE);
+		g.fillRect(1125,500,20,20);
+		g.setColor(Color.GREEN);
+		g.fillRect(1175,500,20,20);
 		
 	}
 	
