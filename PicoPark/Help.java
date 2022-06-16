@@ -31,7 +31,7 @@ public class Help extends JPanel{
 	//methods
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		String strmaparray[][] = ppmodel.readarray("Level4.csv");
+		String strmaparray[][] = ppmodel.readarray("Help.csv");
 		
 		blndoor = true;
 		for(int intRow = 0; intRow < 17; intRow++){
