@@ -174,6 +174,7 @@ public class Help extends JPanel{
 		g.setColor(Color.ORANGE);
 		g.setFont(bigfont);
 		g.drawString("Help",1060,100);
+		
 		//print help instructions
 		g.setFont(normalfont);
 		g.drawString("Hold 'a' to move left", 1010, 150);
@@ -197,6 +198,19 @@ public class Help extends JPanel{
 		g.fillRect(1125,500,20,20);
 		g.setColor(Color.GREEN);
 		g.fillRect(1175,500,20,20);
+		
+		/*
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		g.drawString("Use A & D to move your", 1010, 200);
+		g.drawString("character left and right.", 1010, 225);
+		g.drawString("Use W to jump.", 1010, 250);
+		g.drawString("Stand on the all of the buttons", 1002, 280);
+		g.drawString("(grey blocks) to make the", 1010, 305);
+		g.drawString("door appear.", 1010, 330);
+		g.drawString("One player must each the door", 1010, 355);
+		g.drawString("to get to the next level.", 1010, 380);
+		g.drawString("ENJOY!", 1085, 470);
+		*/
 		
 	}
 	
